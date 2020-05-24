@@ -22,7 +22,7 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
     } else {
       return '';
     }
-  } 
+  }
 
   return (
     <div className='spellcard'>
