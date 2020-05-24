@@ -19,10 +19,11 @@ export const spells = [
       school: 'призыв',
       castingTime: '1 действие',
       range: '60 футов',
-      materials: '',
+      materials: 'кусочек фосфора, ведьминого дерева или личинка светляка',
       components: 'В, С',
       duration: 'мгновенно',
-      source: 'PHB'
+      source: 'PHB',
+      materialCost: 1500
     }
   },
   {

@@ -70,6 +70,15 @@
   text-align: right;
 }
 
+.material-collapsible {
+  font-size: 0.8rem;
+  margin: 0;
+
+  :hover {
+    cursor: pointer;
+  }
+}
+
 div {
   padding: 0.2rem;
 }

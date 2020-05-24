@@ -18,6 +18,7 @@ const Spells = () => {
         duration={spell.ru.duration}
         description={spell.ru.text}
         materials={spell.ru.materials}
+        materialCost={spell.ru.materialCost}
         source={spell.ru.source}
         level={spell.ru.level}
         school={spell.ru.school}

@@ -1,8 +1,9 @@
 import React from 'react';
 import './SpellCard.scss';
 import { mdReact } from 'markdown-react-js';
+import Collapsible from 'react-collapsible';
 
-const SpellCard = ({ name, castingTime, range, components, duration, description, materials, source, classes, level, school }) => {
+const SpellCard = ({ name, castingTime, range, components, duration, description, materials, source, classes, level, school, materialCost }) => {
 
   const levelAdjusted = () => {
     if (level == 0) {
@@ -21,6 +22,18 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
       return newText.join(' ');
     } else {
       return '';
+    }
+  }
+
+  const materialCollapsible = () => {
+    if (materialCost) {
+      return (
+        <Collapsible className='material-collapsible' openedClassName='material-collapsible' easing="ease-in" trigger={materialCost+" зм"} transitionTime="100" transitionCloseTime="100">
+          <p>{materials}</p>
+        </Collapsible>
+      );
+    } else {
+      return <p>{materials}</p>
     }
   }
 
@@ -51,7 +64,7 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
       </div>
 
       <div className="spellcard-materials">
-        <p>{materials}</p>
+        {materialCollapsible()}
       </div>
 
       <div className="spellcard-description section">
