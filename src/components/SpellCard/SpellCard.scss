@@ -1,0 +1,91 @@
+.spellcard {
+  width: 250px;
+  height: 400px;
+  margin: 0.1rem;
+  padding: 0.2rem;
+  background-color: red;
+  border-radius: 5px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr 0.6fr 0.6fr 0.2fr 2.8fr 0.4fr;
+  gap: 1px 1px;
+  grid-template-areas: "name name" "castingTime range" "components duration" "materials materials" "description description" "footer footer";
+}
+
+.spellcard-name {
+  grid-area: name;
+  text-align: center;
+
+  $padd: 0.4rem;
+  padding-top: $padd;
+  padding-bottom: $padd;
+}
+
+.spellcard-castingTime {
+  grid-area: castingTime; 
+  text-align: center;
+}
+
+.spellcard-range {
+  grid-area: range; 
+  text-align: center;
+}
+
+.spellcard-components {
+  grid-area: components; 
+  text-align: center;
+}
+
+.spellcard-duration {
+  grid-area: duration; 
+  text-align: center;
+}
+
+.spellcard-materials {
+  grid-area: materials; 
+  color: white;
+}
+
+.spellcard-description {
+  grid-area: description;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.spellcard-footer { grid-area: footer; }
+
+.section {
+  background-color: rgb(241, 241, 241);
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+  text-align: right;
+}
+
+div {
+  padding: 0.2rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
