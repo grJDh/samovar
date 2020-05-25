@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import './App.scss';
 
 import Spells from './containers/Spells/Spells';
-import SideBar from './containers/Header/SideBar';
+import SideBar from './containers/SideBar/SideBar';
 
 const App = () => {
 
