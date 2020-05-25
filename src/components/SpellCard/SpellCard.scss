@@ -120,12 +120,6 @@ $main-font-size: 0.9rem;
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-
-input {
-  display: none;
-  visibility: hidden;
-}
-
 .material-collapse {
 
   p {
@@ -135,6 +129,12 @@ input {
   :hover {
     cursor: pointer;
   }
+
+  input {
+    display: none;
+    visibility: hidden;
+  }
+  
 }
 
 h1 {

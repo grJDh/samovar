@@ -94,7 +94,7 @@ const SpellCard = ({name, castingTime, range, components,
         <h1 className='tooltip'>{capitalize(name)}
           <span 
             className='tooltiptext'
-            style={{ width:`${otherName.split('').length*8}px`,
+            style={{ width:`${Math.max(otherName.split('').length*8, 50)}px`,
             marginLeft:`${otherName.split('').length*-4}px`}}
           >
             {capitalize(otherName)}

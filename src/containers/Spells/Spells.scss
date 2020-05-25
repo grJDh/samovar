@@ -1,17 +1,17 @@
-$spells-transition: margin-left 1s ease-in-out;
+$spells-transition: margin-left 0.5s ease-in-out;
 
 .spell-table {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
-  margin-left: 15%;
+  margin-left: 250px;
   transition: $spells-transition;
 
   padding: 1rem;
 }
 
 .spells-wide {
-  margin-left: 5%;
+  margin-left: 60px;
   transition: $spells-transition;
 }

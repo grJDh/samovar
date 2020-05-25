@@ -11,13 +11,16 @@ const App = () => {
   const toggleSidebar = () => {setIsSidebarOpened(!isSidebarOpened); console.log(isSidebarOpened)}
 
   const [searchFilterValue, setSearchFilterValue] = useState('fi');
-  const [componentsFilterValue, setComponentsFilterValue] = useState('В, С');
+  const [componentsFilterValue, setComponentsFilterValue] = useState('');
+
+  const onSearchChange = event => setSearchFilterValue(event.target.value);
 
   return (
     <main className=''>
       <SideBar 
         toggleSidebar={toggleSidebar}
         isSidebarOpened={isSidebarOpened}
+        onSearchChange={onSearchChange}
       />
       <Spells
         isSidebarOpened={isSidebarOpened}
