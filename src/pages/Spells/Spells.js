@@ -12,13 +12,16 @@ const Spells = () => {
       {spells.map((spell, i) =>
         <SpellCard
         name={spell.ru.name}
+        otherName={spell.en.name}
         castingTime={spell.ru.castingTime}
         range={spell.ru.range}
         components={spell.ru.components}
         duration={spell.ru.duration}
         description={spell.ru.text}
+        higherLevels={spell.ru.higherLevels}
         materials={spell.ru.materials}
         materialCost={spell.ru.materialCost}
+        materialConsumed={spell.ru.materialConsumed}
         source={spell.ru.source}
         level={spell.ru.level}
         school={spell.ru.school}

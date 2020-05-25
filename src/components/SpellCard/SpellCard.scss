@@ -1,6 +1,9 @@
+$background-white: rgb(241, 241, 241);
+$main-font-size: 0.9rem;
+
 .spellcard {
-  width: 250px;
-  height: 400px;
+  width: 280px;
+  height: 500px;
   margin: 0.1rem;
   padding: 0.2rem;
   background-color: red;
@@ -8,15 +11,23 @@
 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr 0.6fr 0.6fr 0.2fr 2.8fr 0.4fr;
+  grid-template-rows: 0.5fr 0.6fr 0.6fr min-content 2.8fr min-content 0.4fr;
   gap: 1px 1px;
-  grid-template-areas: "name name" "castingTime range" "components duration" "materials materials" "description description" "footer footer";
+  grid-template-areas: "name name" "castingTime range" "components duration" "materials materials" "description description" "higher higher" "footer footer";
+}
+
+.section {
+  background-color: $background-white;
+  border-radius: 5px;
+  margin: 0.2rem;
+  padding: 0.3rem;
 }
 
 .spellcard-name {
   grid-area: name;
   text-align: center;
 
+  padding: 0;
   $padd: 0.4rem;
   padding-top: $padd;
   padding-bottom: $padd;
@@ -45,6 +56,9 @@
 .spellcard-materials {
   grid-area: materials; 
   color: white;
+
+  padding: 0.1rem;
+  padding-left: 0.3rem;
 }
 
 .spellcard-description {
@@ -53,13 +67,11 @@
   scrollbar-width: thin;
 }
 
-.spellcard-footer { grid-area: footer; }
-
-.section {
-  background-color: rgb(241, 241, 241);
-  border-radius: 5px;
-  margin: 2px;
+.spellcard-higher {
+  grid-area: higher;
 }
+
+.spellcard-footer { grid-area: footer; }
 
 .footer {
   display: flex;
@@ -68,19 +80,61 @@
 
   color: white;
   text-align: right;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
 }
 
-.material-collapsible {
-  font-size: 0.8rem;
-  margin: 0;
+.ReactCollapse--collapse {
+  transition: height 250ms;
+}
+
+.ReactCollapse--content {
+  padding: 0.2rem;
+  margin-top: 0.1rem;
+  max-width: 100%;
+  border: 1px solid $background-white;
+  border-radius: 5px;
+
+  font-style: italic;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+input {
+  display: none;
+  visibility: hidden;
+}
+
+.material-collapse {
+
+  p {
+    text-decoration: underline;
+  }
 
   :hover {
     cursor: pointer;
   }
-}
-
-div {
-  padding: 0.2rem;
 }
 
 h1 {
@@ -89,12 +143,20 @@ h1 {
 }
 
 p {
-  font-size: 0.8rem;
+  font-size: $main-font-size;
   margin: 0;
+
+  &.materials {
+    font-style: italic;
+  }
 }
 
 h2 {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: $main-font-size;
   font-weight: bold;
+}
+
+span {
+  font-size: $main-font-size;
 }

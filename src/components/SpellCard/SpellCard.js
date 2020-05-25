@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './SpellCard.scss';
 import { mdReact } from 'markdown-react-js';
-import Collapsible from 'react-collapsible';
+import { Collapse } from 'react-collapse';
 
-const SpellCard = ({ name, castingTime, range, components, duration, description, materials, source, classes, level, school, materialCost }) => {
+const SpellCard = ({name, castingTime, range, components,
+                    duration, description, materials, source,
+                    classes, level, school, materialCost,
+                    otherName, materialConsumed, higherLevels }) => {
+
+  const [isMaterialsOpened, setMaterialsOpened] = useState(false);
+
+  const useCollapse = true;
 
   const levelAdjusted = () => {
     if (level == 0) {
@@ -25,22 +32,75 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
     }
   }
 
+  const doesConsume = () => {
+    if (materialConsumed) {
+      return 'расход-я'
+    } else {
+      return ''
+    }
+  }
+
   const materialCollapsible = () => {
+    if (!useCollapse) {
+      return <p className='materials'>{materials}</p>
+    }
+
     if (materialCost) {
       return (
-        <Collapsible className='material-collapsible' openedClassName='material-collapsible' easing="ease-in" trigger={materialCost+" зм"} transitionTime="100" transitionCloseTime="100">
-          <p>{materials}</p>
-        </Collapsible>
+        <div>
+          <label className='material-collapse'>
+          <p className='materials'>Стоимость комп-та ({doesConsume()}): {materialCost + " зм"}</p>
+            <input
+              type="checkbox"
+              checked={isMaterialsOpened}
+              onChange={() => setMaterialsOpened(!isMaterialsOpened)} />
+          </label>
+          <Collapse isOpened={isMaterialsOpened}>
+            <p className='materials'>{materials}</p>
+          </Collapse>
+        </div>
       );
     } else {
-      return <p>{materials}</p>
+      return (
+        <div>
+          <label className='material-collapse'>
+          <p  className='material-collapse'>Нажмите, чтобы увидеть мат. комп-т</p>
+            <input
+              type="checkbox"
+              checked={isMaterialsOpened}
+              onChange={() => setMaterialsOpened(!isMaterialsOpened)} />
+          </label>
+          <Collapse isOpened={isMaterialsOpened}>
+            <p>{materials}</p>
+          </Collapse>
+        </div>
+      );
+    }
+  }
+
+  const higherLevelsCheck = () => {
+    if (higherLevels) {
+      return (
+        <div className="spellcard-higher section">
+          <p>{higherLevels}</p>
+        </div>
+      );
     }
   }
 
   return (
     <div className='spellcard'>
       <div className="spellcard-name section">
-        <h1>{capitalize(name)}</h1>
+        <h1 className='tooltip'>{capitalize(name)}
+          <span 
+            className='tooltiptext'
+            style={{ width:`${otherName.split('').length*8}px`,
+            marginLeft:`${otherName.split('').length*-4}px`}}
+          >
+            {capitalize(otherName)}
+          </span>
+        </h1>
+        
       </div>
 
       <div className="spellcard-castingTime section">
@@ -64,12 +124,14 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
       </div>
 
       <div className="spellcard-materials">
-        {materialCollapsible()}
+        {(materials) ? materialCollapsible() : ''}
       </div>
 
       <div className="spellcard-description section">
         <p>{markdown(description)}</p>
       </div>
+
+      {higherLevelsCheck()}
 
       <div className="spellcard-footer footer">
         <p>{levelAdjusted()}, {capitalize(school)}</p>
