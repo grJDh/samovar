@@ -1,0 +1,19 @@
+$sidebar-transition: width 1s ease-in-out;
+
+nav {
+  width: 15%;
+  transition: $sidebar-transition;
+
+  background-color: rgb(27, 27, 27);
+
+  position: fixed;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+  
+}
+
+.sidebar-hidden {
+  transition: $sidebar-transition;
+  width: 5%;
+}
