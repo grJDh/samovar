@@ -883,8 +883,8 @@ export const spells = [
       "components": "V, S, M",
       "duration": "Instantaneous",
       "source": "PHB",
-      "materialCost": 10,
-      "materialConsumed": true,
+      "materialCost": 0,
+      "materialConsumed": false,
       "classes": ""
     },
     "ru": {
@@ -899,8 +899,8 @@ export const spells = [
       "components": "В, С, М",
       "duration": "мгновенно",
       "source": "PHB",
-      "materialCost": 10,
-      "materialConsumed": true,
+      "materialCost": 0,
+      "materialConsumed": false,
       "classes": ""
     }
   },
