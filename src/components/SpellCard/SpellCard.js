@@ -41,7 +41,8 @@ const SpellCard = ({name, castingTime, range, components,
 
   const doesConsume = () => {
     if (materialConsumed) {
-      return 'расход-я'
+      if (language === 'Русский') return 'расход-я'
+      return 'consumed'
     } else {
       return ''
     }
@@ -56,11 +57,13 @@ const SpellCard = ({name, castingTime, range, components,
       return (
         <div>
           <label className='material-collapse'>
-          <p className='materials'>Стоимость комп-та ({doesConsume()}): {materialCost + " зм"}</p>
-            <input
-              type="checkbox"
-              checked={isMaterialsOpened}
-              onChange={() => setMaterialsOpened(!isMaterialsOpened)} />
+          {(language === 'Русский') ?
+          <p className='materials'>Стоимость комп-та ({doesConsume()}): <span className='bold'>{materialCost + " зм"}</span></p> :
+          <p className='materials'>Materials cost ({doesConsume()}): <span className='bold'>{materialCost + " gp"}</span></p>}
+          <input
+            type="checkbox"
+            checked={isMaterialsOpened}
+            onChange={() => setMaterialsOpened(!isMaterialsOpened)} />
           </label>
           <Collapse isOpened={isMaterialsOpened}>
             <p className='materials'>{materials}</p>
@@ -71,7 +74,7 @@ const SpellCard = ({name, castingTime, range, components,
       return (
         <div>
           <label className='material-collapse'>
-          <p  className='material-collapse'>Нажмите, чтобы увидеть мат. комп-т</p>
+          <p className='material-collapse'>{(language === 'Русский') ? "Нажмите, чтобы увидеть мат. комп-т" : "Click to see material component"}</p>
             <input
               type="checkbox"
               checked={isMaterialsOpened}
