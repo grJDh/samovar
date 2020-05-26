@@ -1,9 +1,7 @@
 $sidebar-transition: width 0.5s ease-in-out;
 
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
-
 .sidebar {
-  width: 250px;
+  width: 280px;
   transition: $sidebar-transition;
 
   background-color: rgb(27, 27, 27);
@@ -11,7 +9,6 @@ $sidebar-transition: width 0.5s ease-in-out;
   position: fixed;
   left: 0;
   height: 100%;
-  overflow: auto;
 }
 
 .sidebar-hidden {
@@ -24,6 +21,7 @@ $sidebar-transition: width 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
 
   display: flex;
+  flex-direction: column;
 }
 
 .sidebar-filters-hidden {
@@ -33,26 +31,24 @@ $sidebar-transition: width 0.5s ease-in-out;
 
 .sidebar-button {
   color: white;
-  background-color: rgba(27, 27, 27, 0);
-  border: 0;
-  font-size: 1rem;
-
-  padding: 0;
-
-  :hover {
-    background-color: rgba(153, 153, 153, 0.5);
-    cursor: pointer;
-  }
-}
-
-.sidebar-burger {
-  padding: 18px;
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  --mdc-theme-primary: #ffffff;
 }
 
 .sidebar-search {
-  border-color: transparent;
   flex: 1;
 
-  margin: 5px;
+  margin: 10px;
   font-size: 1rem;
+}
+
+.sidebar-select {
+  flex: 1;
+  margin: 10px;
+  
+  ul {
+    width: 260px;
+  }
 }

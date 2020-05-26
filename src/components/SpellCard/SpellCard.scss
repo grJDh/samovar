@@ -98,28 +98,11 @@ $main-font-size: 0.9rem;
   font-style: italic;
 }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
+.rmwc-tooltip-inner {
+  font-size: $main-font-size * 1.2;
+  font-weight: bold;
 }
 
-.tooltiptext {
-  visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
- 
-  position: absolute;
-  z-index: 1;
-  top: 100%;
-  left: 50%;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
 .material-collapse {
 
   p {

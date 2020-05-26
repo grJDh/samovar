@@ -2,21 +2,28 @@ import React, {useState} from 'react';
 import './SpellCard.scss';
 import { mdReact } from 'markdown-react-js';
 import { Collapse } from 'react-collapse';
+import { Tooltip } from '@rmwc/tooltip';
+
+import '@rmwc/tooltip/tooltip.css';
 
 const SpellCard = ({name, castingTime, range, components,
                     duration, description, materials, source,
                     classes, level, school, materialCost,
-                    otherName, materialConsumed, higherLevels }) => {
+                    otherName, materialConsumed, higherLevels,
+                    language }) => {
 
   const [isMaterialsOpened, setMaterialsOpened] = useState(false);
 
   const useCollapse = true;
 
   const levelAdjusted = () => {
-    if (level == 0) {
-      return 'Заговор'
+    if (level === 0) {
+      if (language === 'Русский') return 'Заговор'
+      return 'Cantrip'
     } else {
-      return level + '-й круг'
+      
+      if (language === 'Русский') return level + '-й круг'
+      return level + ' level'
     }
   }
 
@@ -91,35 +98,28 @@ const SpellCard = ({name, castingTime, range, components,
   return (
     <div className='spellcard'>
       <div className="spellcard-name section">
-        <h1 className='tooltip'>{capitalize(name)}
-          <span 
-            className='tooltiptext'
-            style={{ width:`${Math.max(otherName.split('').length*8, 50)}px`,
-            marginLeft:`${otherName.split('').length*-4}px`}}
-          >
-            {capitalize(otherName)}
-          </span>
-        </h1>
-        
+        <Tooltip className='tooltiptext' content={capitalize(otherName)} showArrow align='bottom' enterDelay="300" activateOn="click">
+          <h1>{capitalize(name)}</h1>
+        </Tooltip>
       </div>
 
       <div className="spellcard-castingTime section">
-        <h2>Время накл-я</h2>
+        {(language === 'Русский') ? <h2>Время накл-я</h2> : <h2>Casting time</h2>}
         <p>{castingTime}</p>
       </div>
 
       <div className="spellcard-range section">
-      <h2>Дистанция</h2>
+        {(language === 'Русский') ? <h2>Дистанция</h2> : <h2>Distance</h2>}
         <p>{range}</p>
       </div>
 
       <div className="spellcard-components section">
-      <h2>Компоненты</h2>
+        {(language === 'Русский') ? <h2>Компоненты</h2> : <h2>Components</h2>}
         <p>{components}</p>
       </div>
 
       <div className="spellcard-duration section">
-      <h2>Длительность</h2>
+        {(language === 'Русский') ? <h2>Длительность</h2> : <h2>Duration</h2>}
         <p>{duration}</p>
       </div>
 
