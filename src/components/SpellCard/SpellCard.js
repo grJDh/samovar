@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
 import './SpellCard.scss';
 import { mdReact } from 'markdown-react-js';
-import { Collapse } from 'react-collapse';
 import { Tooltip } from '@rmwc/tooltip';
+import { CollapsibleList } from '@rmwc/list';
 
 import '@rmwc/tooltip/tooltip.css';
+import '@material/list/dist/mdc.list.css';
+import '@rmwc/list/collapsible-list.css';
 
 const SpellCard = ({name, castingTime, range, components,
                     duration, description, materials, source,
                     classes, level, school, materialCost,
                     otherName, materialConsumed, higherLevels,
                     language }) => {
-
-  const [isMaterialsOpened, setMaterialsOpened] = useState(false);
 
   const useCollapse = true;
 
@@ -41,8 +41,8 @@ const SpellCard = ({name, castingTime, range, components,
 
   const doesConsume = () => {
     if (materialConsumed) {
-      if (language === 'Русский') return 'расход-я'
-      return 'consumed'
+      if (language === 'Русский') return '(расход-я)'
+      return '(consumed)'
     } else {
       return ''
     }
@@ -56,33 +56,23 @@ const SpellCard = ({name, castingTime, range, components,
     if (materialCost) {
       return (
         <div>
-          <label className='material-collapse'>
-          {(language === 'Русский') ?
-          <p className='materials'>Стоимость комп-та ({doesConsume()}): <span className='bold'>{materialCost + " зм"}</span></p> :
-          <p className='materials'>Materials cost ({doesConsume()}): <span className='bold'>{materialCost + " gp"}</span></p>}
-          <input
-            type="checkbox"
-            checked={isMaterialsOpened}
-            onChange={() => setMaterialsOpened(!isMaterialsOpened)} />
-          </label>
-          <Collapse isOpened={isMaterialsOpened}>
-            <p className='materials'>{materials}</p>
-          </Collapse>
+          <CollapsibleList handle={(language === 'Русский') ?
+            <p className='material-collapse'>Стоимость комп-тов {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " зм"}</span></p> :
+            <p className='material-collapse'>Materials cost {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " gp"}</span></p>}
+          >
+            <p className='material-collapse-child'>{materials}</p>
+          </CollapsibleList>
         </div>
       );
     } else {
       return (
         <div>
-          <label className='material-collapse'>
-          <p className='material-collapse'>{(language === 'Русский') ? "Нажмите, чтобы увидеть мат. комп-т" : "Click to see material component"}</p>
-            <input
-              type="checkbox"
-              checked={isMaterialsOpened}
-              onChange={() => setMaterialsOpened(!isMaterialsOpened)} />
-          </label>
-          <Collapse isOpened={isMaterialsOpened}>
-            <p>{materials}</p>
-          </Collapse>
+          {/* className='material-collapse-div' */}
+          <CollapsibleList  handle={<p className='material-collapse'>{(language === 'Русский') ? "Нажмите, чтобы увидеть мат. комп-т" :
+          "Click to see material component"}</p>}
+          >
+            <p className='material-collapse-child'>{materials}</p>
+          </CollapsibleList>
         </div>
       );
     }

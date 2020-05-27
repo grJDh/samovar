@@ -3,16 +3,41 @@ import './Spells.scss';
 
 import SpellCard from '../../components/SpellCard/SpellCard';
 
-import { spells } from '../../spellsArray';
+import { test_spells } from '../../spellsArray';
 
-const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, language }) => {
+const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language }) => {
 
-  const searchFilter = spell => spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) || spell.en.name.toLowerCase().includes(searchFilterValue.toLowerCase());
-  const componentsFilter = spell => (spell.ru.components) ? spell.ru.components.includes(componentsFilterValue) : false
+  const spells = test_spells;
 
-  console.log(spells.map(spell => {
-    return {en: {...spell.en, materialCost: 0, materialConsumed: false, classes: ""}, ru: {...spell.ru, materialCost: 0, materialConsumed: false, classes: ""}}
-  }))
+  const searchFilter = spell =>
+    spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) ||
+    spell.en.name.toLowerCase().includes(searchFilterValue.toLowerCase());
+
+  // или (любой из) / и (все) / только эти
+  const componentsFilter = spell => {
+    console.log(componentsModeStrict);
+    if (componentsFilterValue.length) {
+      switch(componentsModeStrict) {
+        case 1:
+          let flags = 0;
+          for (let i = 0; i < componentsFilterValue.length; i++) {
+            if (spell.en.components.includes(componentsFilterValue[i])) flags += 1;
+          };
+          return flags === componentsFilterValue.length ?  true :  false
+        case 2:
+          const splittedComponents = spell.en.components.split(", ");
+          const componentsFilterValueCopy = componentsFilterValue;
+          splittedComponents.sort();
+          componentsFilterValueCopy.sort();
+
+          return splittedComponents.join(" ") === componentsFilterValueCopy.join(" ")
+        default:
+          for (let i = 0; i < componentsFilterValue.length; i ++) {
+            if (spell.en.components.includes(componentsFilterValue[i])) return true
+          };
+      }
+    } else return true
+  }
 
   const languageProperty = (other = false) => {
     if (language === 'Русский' ^ other) return "ru";
@@ -31,17 +56,18 @@ const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, lan
           otherName={spell[languageProperty(true)].name}
           castingTime={spell[languageProperty()].castingTime}
           range={spell[languageProperty()].range}
-          components={spell[languageProperty()].components}
           duration={spell[languageProperty()].duration}
           description={spell[languageProperty()].description}
           higherLevels={spell[languageProperty()].higherLevels}
           materials={spell[languageProperty()].materials}
-          materialCost={spell[languageProperty()].materialCost}
-          materialConsumed={spell[languageProperty()].materialConsumed}
-          source={spell[languageProperty()].source}
-          level={spell[languageProperty()].level}
-          school={spell[languageProperty()].school}
-          key={i}
+          components={spell[languageProperty()].components}
+          materialCost={spell.materialCost}
+          materialConsumed={spell.materialConsumed}
+          source={spell.source}
+          level={spell.level}
+          school={spell.school}
+
+          key={spell.en.name}
           // classes={spell.ru}
 
           language={language}

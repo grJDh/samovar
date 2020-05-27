@@ -1,3 +1,61 @@
+export const test_spells = [
+  {
+    "en": {
+      "name": "Fire Bolt",
+      "description": "You hurl a mote of fire at a creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 fire damage. A flammable object hit by this spell ignites if it isn't being worn or carried. This spell's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).",
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "materials": "",
+      "duration": "Instantaneous",
+      "components": "V, S"
+    },
+    "ru": {
+      "name": "Огненная стрела",
+      "description": "Вы запускаете частичку огня в существо или предмет в пределах дальности заклинания. Сделайте заклинательную атаку дальнего боя по этой цели. При попадании цель получает 1d10 урона огнем. Воспламеняющися объект загорается при попадании, если он не находится во владении существа.<br>Урон заклинания увеличивается на 1d10 при достижении 5 уровня (2d10), 11 уровня (3d10) и 17 уровня (4d10).",
+      "castingTime": "1 действие",
+      "range": "120 футов",
+      "materials": "",
+      "duration": "мгновенно",
+      "components": "В, С"
+    },
+    "level": 0,
+    "school": "Evocation",
+    "source": "PHB",
+    "materialCost": 0,
+    "materialConsumed": false,
+    "classes": "",
+    "ritual": false
+  },
+  {
+    "en": {
+      "name": "Fireball",
+      "description": "A bright streak flashes from your pointing finger to a point you choose within range then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot radius must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren't being worn or carried. At Higher Levels. When you cast this spell using a spell slot of 4th level of higher, the damage increases by 1d6 for each slot level above 3rd.",
+      "castingTime": "1 action",
+      "range": "150 feet",
+      "materials": "a tiny ball of bat guana and sulfur",
+      "duration": "Instantaneous",
+      "components": "V, S, M",
+      
+    },
+    "ru": {
+      "name": "Огненный шар",
+      "description": "Вы указываете пальцем на место в пределах дальности заклинания, и с него слетает яркая вспышка, которая прочерчивает воздух, а затем с глухим ревом расцветает огненным взрывом. Каждое существо в сфере радиусом 20 футов вокруг выбранной точки должно сделать спасбросок по Ловкости. В случае провала цель получает 8d6 огненного урона, а в случае успеха - половину этого урона. Огонь огибает углы и поджигает любые воспламеняющиеся объекты, которые не находятся во владении существ.   <br>На более высоких кругах. Если вы произносите заклинание, используя ячейку 4 круга или выше, то урон увеличивается на 1d6 за каждый круг выше третьего.",
+      "castingTime": "1 действие",
+      "range": "150 футов",
+      "materials": "маленький шарик из гуано летучей мыши и серы",
+      "duration": "мгновенно",
+      "components": "В, С, М",
+    },
+    "level": 3,
+    "school": "Evocation",
+    "source": "PHB",
+    "materialCost": 0,
+    "materialConsumed": false,
+    "classes": "",
+    "ritual": false
+  },
+];
+
 export const spells = [
   {
     "en": {
