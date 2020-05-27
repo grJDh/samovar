@@ -73,14 +73,14 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
                          metaIcon="chevron_right"/>}
         >
         <List className='schools-collapsible-child'>
-          {Object.keys(schools).map(key => (
+          {Object.keys(schools).map(school => (
             <ListItem
-              key={key}
-              onClick={() => onSchoolsChange(key)}
+              key={school}
+              onClick={() => onSchoolsChange(school)}
             >
-              {key}
+              {(language === 'Русский') ? schools[school].ru : schools[school].en}
               <ListItemMeta>
-                <Checkbox checked={schoolsFilterValue.includes(key)} readOnly />
+                <Checkbox checked={schoolsFilterValue.includes(school)} readOnly />
               </ListItemMeta>
             </ListItem>
           ))}
