@@ -27,6 +27,31 @@ const SpellCard = ({name, castingTime, range, components,
     }
   }
 
+  const schoolLanguage = () => {
+    if (language === 'Русский') {
+      switch(school) {
+        case "Conjuration":
+          return "Призыв";
+        case "Abjuration":
+          return "Ограждение";
+        case "Necromancy":
+          return "Некромантия";
+        case "Evocation":
+          return "Воплощение";
+        case "Enchantment":
+          return "Очарование";
+        case "Transmutation":
+          return "Трансмутация";
+        case "Illusion":
+          return "Иллюзия";
+        case "Divination":
+          return "Прорицание";
+        default:
+          return '???';
+      } 
+    } else return school
+  }
+
   const markdown = text => mdReact()(text);
 
   const capitalize = text => {
@@ -127,7 +152,7 @@ const SpellCard = ({name, castingTime, range, components,
       {higherLevelsCheck()}
 
       <div className="spellcard-footer footer">
-        <p>{levelAdjusted()}, {capitalize(school)}</p>
+        <p>{levelAdjusted()}, {schoolLanguage(school)}</p>
         <p>{source}</p>
       </div>
     </div>

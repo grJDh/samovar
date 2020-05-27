@@ -78,7 +78,10 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
             <Checkbox label={(language === 'Русский') ? "М" : "M"} onChange={() => setComponentValue("M")}  />
           </div>
           <div className='components-collapsible-child'>
-            <Tooltip content={<span>Показывать заклинания, в списке компонентов которых есть любой из выбранных компонентов</span>} align='bottom'>
+            <Tooltip className='components-tooltip'
+                     content={<span>{(language === 'Русский') ? "Показывать заклинания с любыми из выбранных компонентов" :
+                     "Show spells with any of the selected components"}</span>}
+                     align='bottom'>
               <div>
                 <Radio label={(language === 'Русский') ? "ИЛИ" : "OR"}
                       value={0}
@@ -87,7 +90,10 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
               </div>
             </Tooltip>
 
-            <Tooltip content={<span>Показывать заклинания, в списке компонентов которых есть ВСЕ выбранные компоненты</span>} align='bottom'>
+            <Tooltip className='components-tooltip'
+                     content={<span>{(language === 'Русский') ? "Показывать заклинания со ВСЕМИ выбранными компонентами" :
+                     "Show spells with ALL selected components"}</span>}
+                     align='bottom'>
               <div>
                 <Radio label={(language === 'Русский') ? "И" : "AND"}
                     value={1}
@@ -96,7 +102,10 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
               </div>
             </Tooltip>
 
-            <Tooltip content={<span>Показывать заклинания, в компонентах которых есть ТОЛЬКО выбранные компоненты</span>} align='bottom'>
+            <Tooltip className='components-tooltip'
+                     content={<span>{(language === 'Русский') ? "Показывать заклинания с ТОЛЬКО выбранными компонентами" :
+                     "Show spells with ONLY selected components"}</span>}
+                     align='bottom'>
               <div>
                 <Radio label={(language === 'Русский') ? "ТОЛЬКО" : "ONLY"}
                     value={2}
