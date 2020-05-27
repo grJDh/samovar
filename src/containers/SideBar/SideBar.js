@@ -4,8 +4,7 @@ import { TextField } from '@rmwc/textfield';
 import { Select } from '@rmwc/select';
 import { Checkbox } from '@rmwc/checkbox';
 import { Radio } from '@rmwc/radio';
-import { CollapsibleList } from '@rmwc/list';
-import { SimpleListItem } from '@rmwc/list';
+import { CollapsibleList, List, ListItem, ListItemMeta, SimpleListItem } from '@rmwc/list';
 import { Tooltip } from '@rmwc/tooltip';
 
 import '@material/icon-button/dist/mdc.icon-button.css';
@@ -28,7 +27,7 @@ import '@rmwc/tooltip/tooltip.css';
 import './SideBar.scss';
 
 const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchField, searchFilterValue, language, changeLanguage,
-                   setComponentValue, setComponentsMode, componentsModeStrict }) => {
+                   setComponentValue, setComponentsMode, componentsModeStrict, schools, onSchoolsChange, schoolsFilterValue }) => {
 
   const labelsLanguage = label => {
     if (language === 'Русский') {
@@ -56,6 +55,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
     <nav className={`sidebar ${isSidebarOpened ? "" : "sidebar-hidden"}`}>
       <IconButton primary='white' ripple icon="menu" className='sidebar-button' onClick={toggleSidebar}/>
       <div className={`sidebar-filters ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>
+        
         <TextField
           icon="search"
           label={labelsLanguage("search")}
@@ -69,8 +69,28 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
           }}/>
 
         <CollapsibleList handle={<SimpleListItem className='sidebar-component components-collapsible'
-                                                 text={(language === 'Русский') ? "Компоненты" : "Components"}
-                                                 metaIcon="chevron_right"/>}
+                         text={(language === 'Русский') ? "Школы" : "Schools"}
+                         metaIcon="chevron_right"/>}
+        >
+        <List className='schools-collapsible-child'>
+          {Object.keys(schools).map(key => (
+            <ListItem
+              key={key}
+              onClick={() => onSchoolsChange(key)}
+            >
+              {key}
+              <ListItemMeta>
+                <Checkbox checked={schoolsFilterValue.includes(key)} readOnly />
+              </ListItemMeta>
+            </ListItem>
+          ))}
+        </List>
+        </CollapsibleList>
+
+        <CollapsibleList handle={<SimpleListItem 
+                         className='sidebar-component components-collapsible'
+                         text={(language === 'Русский') ? "Компоненты" : "Components"}
+                         metaIcon="chevron_right"/>}
         >
           <div className='components-collapsible-child'>
             <Checkbox label={(language === 'Русский') ? "В" : "V"} onChange={() => setComponentValue("V")} />

@@ -5,7 +5,8 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 
 import { test_spells } from '../../spellsArray';
 
-const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language }) => {
+const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schools,
+                  schoolsFilterValue }) => {
 
   const spells = test_spells;
 
@@ -15,7 +16,6 @@ const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, com
 
   // или (любой из) / и (все) / только эти
   const componentsFilter = spell => {
-    console.log(componentsModeStrict);
     if (componentsFilterValue.length) {
       switch(componentsModeStrict) {
         case 1:
@@ -39,6 +39,14 @@ const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, com
     } else return true
   }
 
+  const schoolsFilter = spell => {
+    if (schoolsFilterValue.length) {
+      for (let i = 0; i < schoolsFilterValue.length; i ++) {
+        if (spell.school.includes(schoolsFilterValue[i])) return true
+      };
+    } else return true
+  }
+
   const languageProperty = (other = false) => {
     if (language === 'Русский' ^ other) return "ru";
     
@@ -50,6 +58,7 @@ const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, com
       {spells
       .filter(spell => searchFilter(spell))
       .filter(spell => componentsFilter(spell))
+      .filter(spell => schoolsFilter(spell))
       .map((spell, i) =>
         <SpellCard
           name={spell[languageProperty()].name}

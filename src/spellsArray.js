@@ -1,3 +1,38 @@
+export const schools = {
+  Conjuration: {
+    en: "Conjuration",
+    ru: "Призыв"
+  },
+  Abjuration: {
+    en: "Abjuration",
+    ru: "Ограждение"
+  },
+  Necromancy: {
+    en: "Necromancy",
+    ru: "Некромантия"
+  },
+  Evocation: {
+    en: "Evocation",
+    ru: "Воплощение"
+  },
+  Enchantment: {
+    en: "Enchantment",
+    ru: "Очарование"
+  },
+  Transmutation: {
+    en: "Transmutation",
+    ru: "Трансмутация"
+  },
+  Illusion: {
+    en: "Illusion",
+    ru: "Иллюзия"
+  },
+  Divination: {
+    en: "Divination",
+    ru: "Прорицание"
+  }
+};
+
 export const test_spells = [
   {
     "en": {
