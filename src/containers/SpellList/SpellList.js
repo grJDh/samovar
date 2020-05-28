@@ -3,12 +3,12 @@ import './SpellList.scss';
 
 import SpellCard from '../../components/SpellCard/SpellCard';
 
-import { test_spells } from '../../spellsArray';
+import { spells } from '../../spellsArray';
 
 const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schools,
                   schoolsFilterValue }) => {
 
-  const spells = test_spells;
+  // const spells = test_spells;
 
   const searchFilter = spell =>
     spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) ||
@@ -69,7 +69,7 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
           description={spell[languageProperty()].description}
           higherLevels={spell[languageProperty()].higherLevels}
           materials={spell[languageProperty()].materials}
-          components={spell[languageProperty()].components}
+          components={spell.components}
           materialCost={spell.materialCost}
           materialConsumed={spell.materialConsumed}
           source={spell.source}

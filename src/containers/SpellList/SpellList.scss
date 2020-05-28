@@ -4,14 +4,13 @@ $spells-transition: margin-left 0.5s ease-in-out;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
   margin-left: 280px;
   transition: $spells-transition;
-
-  padding: 1rem;
+  padding: 1rem;  
+  flex: 1;
 }
 
 .spells-wide {
   margin-left: 60px;
   transition: $spells-transition;
-}
+} 
