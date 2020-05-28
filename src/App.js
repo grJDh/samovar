@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
+import red from '@material-ui/core/colors/red';
 
 import './App.scss';
 
@@ -8,6 +10,16 @@ import SideBar from './containers/SideBar/SideBar';
 import { schools } from './spellsArray';
 
 const App = () => {
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#fff',
+      },
+      secondary: red,
+      type: 'dark',
+    },
+  });
 
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
   const toggleSidebar = () => {setIsSidebarOpened(!isSidebarOpened);}
@@ -50,34 +62,37 @@ const App = () => {
   // rituals
 
   return (
-    <main className=''>
-      <SideBar 
-        toggleSidebar={toggleSidebar}
-        isSidebarOpened={isSidebarOpened}
-        changeLanguage={changeLanguage}
-        onSearchChange={onSearchChange}
-        searchFilterValue={searchFilterValue}
-        clearSearchField={clearSearchField}
-        setComponentValue={setComponentValue}
-        setComponentsMode={setComponentsMode}
-        componentsModeStrict={componentsModeStrict}
-        onSchoolsChange={onSchoolsChange}
-        schoolsFilterValue={schoolsFilterValue}
+    <ThemeProvider theme={theme}>
+      <main className=''>
+        <SideBar 
+          toggleSidebar={toggleSidebar}
+          isSidebarOpened={isSidebarOpened}
+          changeLanguage={changeLanguage}
+          onSearchChange={onSearchChange}
+          searchFilterValue={searchFilterValue}
+          clearSearchField={clearSearchField}
+          setComponentValue={setComponentValue}
+          componentsFilterValue={componentsFilterValue}
+          setComponentsMode={setComponentsMode}
+          componentsModeStrict={componentsModeStrict}
+          onSchoolsChange={onSchoolsChange}
+          schoolsFilterValue={schoolsFilterValue}
 
-        schools={schools}
-        language={language}
-      />
-      <Spells
-        isSidebarOpened={isSidebarOpened}
-        searchFilterValue={searchFilterValue}
-        componentsFilterValue={componentsFilterValue}
-        componentsModeStrict={componentsModeStrict}
-        schoolsFilterValue={schoolsFilterValue}
+          schools={schools}
+          language={language}
+        />
+        <Spells
+          isSidebarOpened={isSidebarOpened}
+          searchFilterValue={searchFilterValue}
+          componentsFilterValue={componentsFilterValue}
+          componentsModeStrict={componentsModeStrict}
+          schoolsFilterValue={schoolsFilterValue}
 
-        language={language}
-        schools={schools}
-      />
-    </main>
+          language={language}
+          schools={schools}
+        />
+      </main>
+    </ThemeProvider>
   );
 }
 

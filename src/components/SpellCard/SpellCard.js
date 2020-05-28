@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './SpellCard.scss';
 import { mdReact } from 'markdown-react-js';
 import { Tooltip } from '@rmwc/tooltip';

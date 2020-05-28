@@ -30,20 +30,33 @@ $sidebar-transition: width 0.5s ease-in-out;
 }
 
 .sidebar-button {
-  color: white;
   width: 60px;
   height: 60px;
   font-size: 2rem;
-  --mdc-theme-primary: #ffffff;
 }
 
 .sidebar-component {
   flex: 1;
   margin: 10px;
   font-size: 1rem;
+  color: white;
 
   ul {
     width: 260px;
+  }
+
+  &.MuiFormControl-root {
+    margin: 10px;
+  }
+
+  &.MuiList-root {
+    background-color: #424242;
+    margin: 10px;
+    border-radius: 3px;
+  }
+
+  &.MuiList-padding {
+    padding: 0;
   }
 }
 
@@ -54,20 +67,15 @@ $sidebar-transition: width 0.5s ease-in-out;
 }
 
 .components-collapsible-child {
-  margin: 0 10px 0 10px;
-  background-color: #ffffff;
-  border-top: 1px solid black;
-
   display: flex;
   justify-content: space-around;
 }
 
 .components-tooltip {
   max-width: 200px;
+  font-size: 10rem;
 }
 
 .schools-collapsible-child {
   margin: 0 10px 0 10px;
-  background-color: #ffffff;
-  border-top: 1px solid black;
 }
