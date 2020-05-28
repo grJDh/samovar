@@ -84,7 +84,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
         />
 
         <FormControl className='sidebar-component levels-component'>
-          {/* <InputLabel>{labelsLanguage("language")}</InputLabel> */}
+          <Typography className='levels-title'>{(language === 'Русский') ? "Выберите уровни" : "Choose levels"}</Typography>
           <Slider
             value={levelsFilterValue}
             onChange={onLevelsChange}

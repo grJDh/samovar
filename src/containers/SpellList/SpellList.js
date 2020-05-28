@@ -10,7 +10,7 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 import { spells } from '../../spellsArray';
 
 const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schools,
-                  schoolsFilterValue }) => {
+                  schoolsFilterValue, levelsFilterValue }) => {
 
   // const spells = test_spells;
 
@@ -51,6 +51,8 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
     } else return true
   }
 
+  const levelsFilter = spell => (spell.level >= levelsFilterValue[0] && spell.level <= levelsFilterValue[1]) ? true : false;
+
   const languageProperty = (other = false) => {
     if (language === 'Русский' ^ other) return "ru";
     
@@ -61,6 +63,7 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
   .filter(spell => searchFilter(spell))
   .filter(spell => componentsFilter(spell))
   .filter(spell => schoolsFilter(spell))
+  .filter(spell => levelsFilter(spell))
 
   const cellRenderer = ({columnIndex, key, rowIndex, style, data}) => {
     if (filteredSpells.length !== 0) {  

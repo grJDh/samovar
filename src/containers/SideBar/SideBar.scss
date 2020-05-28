@@ -87,3 +87,9 @@ $sidebar-transition: width 0.5s ease-in-out;
 .schools-collapsible-child {
   margin: 0 10px 0 10px;
 }
+
+.levels-title {
+  &.MuiTypography-root {
+    margin-bottom: 40px;
+  }
+}

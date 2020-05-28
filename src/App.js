@@ -58,7 +58,6 @@ const App = () => {
   const onLevelsChange = (event, value) => {setLevelsFilterValue(value);console.log(value);}
 
   // classes
-  // levels
   // sources
   // rituals
 
@@ -95,6 +94,7 @@ const App = () => {
           componentsFilterValue={componentsFilterValue}
           componentsModeStrict={componentsModeStrict}
           schoolsFilterValue={schoolsFilterValue}
+          levelsFilterValue={levelsFilterValue}
 
           language={language}
           schools={schools}
