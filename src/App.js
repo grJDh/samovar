@@ -6,7 +6,7 @@ import './App.scss';
 import SpellList from './containers/SpellList/SpellList';
 import SideBar from './containers/SideBar/SideBar';
 
-import { schools } from './spellsArray';
+import { schools, sources } from './spellsArray';
 
 const App = () => {
 
@@ -57,8 +57,20 @@ const App = () => {
   const [levelsFilterValue, setLevelsFilterValue]  = useState([0, 9]);
   const onLevelsChange = (event, value) => {setLevelsFilterValue(value);console.log(value);}
 
+  const [sourcesFilterValue, setSourcesFilterValue] = useState(['PHB', 'XGTE', 'TOEE', 'SCAG']);
+  const onSourcesChange = source => {
+    const indexOfSource = sourcesFilterValue.indexOf(source);
+    if (indexOfSource === -1) {
+      setSourcesFilterValue([...sourcesFilterValue, source]);
+    } else {
+      setSourcesFilterValue(sourcesFilterValue.filter((src, i) => i !== indexOfSource));
+    }
+  }
+
+  const [numberOfSpells, setNumberOfSpells] = useState(0);
+  const onNumberOfSpellsChange = value => setNumberOfSpells(value);
+
   // classes
-  // sources
   // rituals
 
   return (
@@ -85,8 +97,13 @@ const App = () => {
           onLevelsChange={onLevelsChange}
           levelsFilterValue={levelsFilterValue}
 
+          onSourcesChange={onSourcesChange}
+          sourcesFilterValue={sourcesFilterValue}
+
           schools={schools}
+          sources={sources}
           language={language}
+          numberOfSpells={numberOfSpells}
         />
         <SpellList
           isSidebarOpened={isSidebarOpened}
@@ -95,9 +112,12 @@ const App = () => {
           componentsModeStrict={componentsModeStrict}
           schoolsFilterValue={schoolsFilterValue}
           levelsFilterValue={levelsFilterValue}
+          sourcesFilterValue={sourcesFilterValue}
 
           language={language}
           schools={schools}
+          sources={sources}
+          onNumberOfSpellsChange={onNumberOfSpellsChange}
         />
       </main>
     </ThemeProvider>

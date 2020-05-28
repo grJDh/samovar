@@ -9,8 +9,8 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 
 import { spells } from '../../spellsArray';
 
-const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schools,
-                  schoolsFilterValue, levelsFilterValue }) => {
+const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schoolsFilterValue,
+                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange }) => {
 
   // const spells = test_spells;
 
@@ -51,6 +51,14 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
     } else return true
   }
 
+  const sourcesFilter = spell => {
+    if (sourcesFilterValue.length) {
+      for (let i = 0; i < sourcesFilterValue.length; i ++) {
+        if (spell.source.includes(sourcesFilterValue[i])) return true
+      };
+    }
+  }
+
   const levelsFilter = spell => (spell.level >= levelsFilterValue[0] && spell.level <= levelsFilterValue[1]) ? true : false;
 
   const languageProperty = (other = false) => {
@@ -64,6 +72,13 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
   .filter(spell => componentsFilter(spell))
   .filter(spell => schoolsFilter(spell))
   .filter(spell => levelsFilter(spell))
+  .filter(spell => sourcesFilter(spell))
+
+  onNumberOfSpellsChange(filteredSpells.length);
+
+  // console.log(
+  //   spells.filter(spell => spell.source === "SCPC")
+  // );
 
   const cellRenderer = ({columnIndex, key, rowIndex, style, data}) => {
     if (filteredSpells.length !== 0) {  
@@ -94,7 +109,7 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
             />}
           </div>
         );
-      } return 1
+      } return null
     } else {
       return <p>Wow, such empty</p>
     }

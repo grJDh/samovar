@@ -16,6 +16,17 @@ $sidebar-transition: width 0.5s ease-in-out;
   width: 60px;
 }
 
+.sidebar-first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-spellNum {
+  margin: 10px;
+  color: white
+}
+
 .sidebar-filters {
   opacity: 1;
   transition: opacity 0.5s ease-in-out;

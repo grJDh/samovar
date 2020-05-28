@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -27,7 +27,7 @@ import './SideBar.scss';
 
 const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchField, searchFilterValue, language, changeLanguage,
                    setComponentValue, setComponentsMode, componentsModeStrict, schools, onSchoolsChange, schoolsFilterValue,
-                   componentsFilterValue, onLevelsChange, levelsFilterValue }) => {
+                   componentsFilterValue, onLevelsChange, levelsFilterValue, sources, onSourcesChange, sourcesFilterValue, numberOfSpells }) => {
 
   const labelsLanguage = label => {
     if (language === 'Русский') {
@@ -51,14 +51,19 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
     }
   }
 
-  const [schoolsOpened, setSchoolsOpened] = React.useState(false);
+  const [schoolsOpened, setSchoolsOpened] = useState(false);
   const openSchools = () => {
     setSchoolsOpened(!schoolsOpened);
   };
 
-  const [componentsOpened, setComponentsOpened] = React.useState(false);
+  const [componentsOpened, setComponentsOpened] = useState(false);
   const openComponents = () => {
     setComponentsOpened(!componentsOpened);
+  };
+
+  const [sourcesOpened, setSourcesOpened] = useState(false);
+  const openSources = () => {
+    setSourcesOpened(!sourcesOpened);
   };
 
   const marks = [
@@ -67,7 +72,10 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
   
   return (
     <nav className={`sidebar ${isSidebarOpened ? "" : "sidebar-hidden"}`}>
-      <IconButton className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
+      <div className='sidebar-first'>
+        <IconButton className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
+        <p className={`sidebar-spellNum ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>{numberOfSpells}</p>
+      </div>
       <div className={`sidebar-filters ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>
         
         <TextField
@@ -104,7 +112,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
           <Collapse in={schoolsOpened} timeout="auto" >
             <List component="div">
               {Object.keys(schools).map(school => (
-                <ListItem button key={school}onClick={() => onSchoolsChange(school)}>
+                <ListItem button key={school} onClick={() => onSchoolsChange(school)}>
                   <Checkbox checked={schoolsFilterValue.includes(school)} />
                   <ListItemText primary={(language === 'Русский') ? schools[school].ru : schools[school].en} />
                 </ListItem>
@@ -154,6 +162,24 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
                   <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "=" : "="} />
                 </ListItem>
               </Tooltip>
+            </List>
+          </Collapse>
+        </List>
+
+        <List className='sidebar-component'>
+          <ListItem button onClick={openSources}>
+            <ListItemText primary={(language === 'Русский') ? "Источники" : "Sources"} />
+            {sourcesOpened ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+
+          <Collapse in={sourcesOpened} timeout="auto" >
+            <List component="div">
+              {Object.keys(sources).map(source => (
+                <ListItem button key={source} onClick={() => onSourcesChange(source)}>
+                  <Checkbox checked={sourcesFilterValue.includes(source)} />
+                  <ListItemText primary={(language === 'Русский') ? sources[source].ru : sources[source].en} />
+                </ListItem>
+              ))}
             </List>
           </Collapse>
         </List>
