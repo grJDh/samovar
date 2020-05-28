@@ -48,14 +48,16 @@ $sidebar-transition: width 0.5s ease-in-out;
 }
 
 .components-collapsible {
-  background-color: #ffffff;
+  color: white;
+  background-color: #424242;
   border-radius: 5px 5px 0 0;
   margin-bottom: 0;
 }
 
 .components-collapsible-child {
   margin: 0 10px 0 10px;
-  background-color: #ffffff;
+  color: white;
+  background-color: #424242;
   border-top: 1px solid black;
 
   display: flex;
@@ -68,6 +70,7 @@ $sidebar-transition: width 0.5s ease-in-out;
 
 .schools-collapsible-child {
   margin: 0 10px 0 10px;
-  background-color: #ffffff;
+  color: white;
+  background-color: #424242;
   border-top: 1px solid black;
 }
