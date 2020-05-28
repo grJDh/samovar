@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
+import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
 
 import './App.scss';
 
-import Spells from './containers/Spells/Spells';
+import SpellList from './containers/SpellList/SpellList';
 import SideBar from './containers/SideBar/SideBar';
 
 import { schools } from './spellsArray';
 
 const App = () => {
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#fff',
+      },
+      secondary: {
+        main: '#fff',
+      },
+      type: 'dark',
+    },
+  });
 
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
   const toggleSidebar = () => {setIsSidebarOpened(!isSidebarOpened);}
@@ -41,43 +54,53 @@ const App = () => {
     }
   }
 
-  console.log(schoolsFilterValue);
+  const [levelsFilterValue, setLevelsFilterValue]  = useState([0, 9]);
+  const onLevelsChange = (event, value) => {setLevelsFilterValue(value);console.log(value);}
 
   // classes
   // levels
-  // schools
   // sources
   // rituals
 
   return (
-    <main className=''>
-      <SideBar 
-        toggleSidebar={toggleSidebar}
-        isSidebarOpened={isSidebarOpened}
-        changeLanguage={changeLanguage}
-        onSearchChange={onSearchChange}
-        searchFilterValue={searchFilterValue}
-        clearSearchField={clearSearchField}
-        setComponentValue={setComponentValue}
-        setComponentsMode={setComponentsMode}
-        componentsModeStrict={componentsModeStrict}
-        onSchoolsChange={onSchoolsChange}
-        schoolsFilterValue={schoolsFilterValue}
+    <ThemeProvider theme={theme}>
+      <main className=''>
+        <SideBar 
+          toggleSidebar={toggleSidebar}
+          isSidebarOpened={isSidebarOpened}
 
-        schools={schools}
-        language={language}
-      />
-      <Spells
-        isSidebarOpened={isSidebarOpened}
-        searchFilterValue={searchFilterValue}
-        componentsFilterValue={componentsFilterValue}
-        componentsModeStrict={componentsModeStrict}
-        schoolsFilterValue={schoolsFilterValue}
+          changeLanguage={changeLanguage}
 
-        language={language}
-        schools={schools}
-      />
-    </main>
+          onSearchChange={onSearchChange}
+          searchFilterValue={searchFilterValue}
+          clearSearchField={clearSearchField}
+
+          setComponentValue={setComponentValue}
+          componentsFilterValue={componentsFilterValue}
+          setComponentsMode={setComponentsMode}
+          componentsModeStrict={componentsModeStrict}
+
+          onSchoolsChange={onSchoolsChange}
+          schoolsFilterValue={schoolsFilterValue}
+
+          onLevelsChange={onLevelsChange}
+          levelsFilterValue={levelsFilterValue}
+
+          schools={schools}
+          language={language}
+        />
+        <SpellList
+          isSidebarOpened={isSidebarOpened}
+          searchFilterValue={searchFilterValue}
+          componentsFilterValue={componentsFilterValue}
+          componentsModeStrict={componentsModeStrict}
+          schoolsFilterValue={schoolsFilterValue}
+
+          language={language}
+          schools={schools}
+        />
+      </main>
+    </ThemeProvider>
   );
 }
 

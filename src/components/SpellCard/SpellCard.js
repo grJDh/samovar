@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './SpellCard.scss';
 import { mdReact } from 'markdown-react-js';
 import { Tooltip } from '@rmwc/tooltip';
@@ -8,7 +8,7 @@ import '@rmwc/tooltip/tooltip.css';
 import '@material/list/dist/mdc.list.css';
 import '@rmwc/list/collapsible-list.css';
 
-const SpellCard = ({name, castingTime, range, components,
+const SpellCard = ({ name, castingTime, range, components,
                     duration, description, materials, source,
                     classes, level, school, materialCost,
                     otherName, materialConsumed, higherLevels,
@@ -25,6 +25,23 @@ const SpellCard = ({name, castingTime, range, components,
       if (language === 'Русский') return level + '-й круг'
       return level + ' level'
     }
+  }
+
+  const componentsLanguage = () => {
+    if (language === 'Русский') {
+      return components.split(", ").map(component => {
+        switch(component) {
+          case "V":
+            return "В";
+          case "S":
+            return "С";
+          case "M":
+            return "М";
+          default:
+            return '???';
+        }
+      }).join(", ")
+    } else return components
   }
 
   const schoolLanguage = () => {
@@ -133,7 +150,7 @@ const SpellCard = ({name, castingTime, range, components,
 
       <div className="spellcard-components section">
         {(language === 'Русский') ? <h2>Компоненты</h2> : <h2>Components</h2>}
-        <p>{components}</p>
+        <p>{componentsLanguage()}</p>
       </div>
 
       <div className="spellcard-duration section">
