@@ -62,9 +62,10 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
   .filter(spell => componentsFilter(spell))
   .filter(spell => schoolsFilter(spell))
 
-  function cellRenderer({columnIndex, key, rowIndex, style}) {
+  function cellRenderer({columnIndex, key, rowIndex, style, data}) {
+    console.log(data)
     if (filteredSpells.length !== 0) {  
-      const index = (Math.floor(rowIndex * 6)) + columnIndex;
+      const index = (Math.floor(rowIndex * data)) + columnIndex;
       if (filteredSpells[index]) {
         return (
           <div key={key} style={style}>
@@ -101,18 +102,19 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
     <div className={`spell-table ${isSidebarOpened ? "" : "spells-wide"}`}>
 
           <AutoSizer>
-          {({ height, width }) => (
+          {({ height, width }) => { return (
             <Grid
-              columnCount={width / 300}
-              rowCount={Math.ceil(filteredSpells.length / 6)}
+              columnCount={Math.floor(width / 300)}
+              rowCount={Math.ceil(filteredSpells.length / Math.floor(width / 300))}
               columnWidth={300}
               rowHeight={510}
               height={height}
               width={width}
+              itemData={Math.floor(width / 300)}
             >
               {cellRenderer}
             </Grid>
-          )}
+          )}}
           </AutoSizer>
     </div>
   );
