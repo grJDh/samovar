@@ -148,7 +148,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
                   <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "И" : "AND"} />
                 </ListItem>
               </Tooltip>
-              <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания с ТОЛЬКО выбранными компонентами" : "Show spells with ONLY selected components"}</span>}>
+              <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания ТОЛЬКО с выбранными компонентами" : "Show spells with ONLY selected components"}</span>}>
                 <ListItem button onClick={() => setComponentsMode(2)} >
                   <Radio value={2} checked={componentsModeStrict === 2} />
                   <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "=" : "="} />

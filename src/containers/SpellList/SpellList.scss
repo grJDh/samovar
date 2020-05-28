@@ -11,3 +11,8 @@ $spells-transition: margin-left 0.5s ease-in-out;
   margin-left: 60px;
   transition: $spells-transition;
 } 
+
+.spell-table-window {
+  display: flex;
+  justify-content: center;
+}
