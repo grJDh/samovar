@@ -1,9 +1,6 @@
 $spells-transition: margin-left 0.5s ease-in-out;
 
 .spell-table {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   margin-left: 280px;
   transition: $spells-transition;
   padding: 1rem;  

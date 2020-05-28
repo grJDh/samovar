@@ -28,7 +28,7 @@ const App = () => {
   const [language, setLanguage] = useState('Русский');
   const changeLanguage = event => setLanguage(event.target.value);
 
-  const [searchFilterValue, setSearchFilterValue] = useState('fir');
+  const [searchFilterValue, setSearchFilterValue] = useState('');
   const onSearchChange = event => setSearchFilterValue(event.target.value);
   const clearSearchField = () => setSearchFilterValue('');
 
