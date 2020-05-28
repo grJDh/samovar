@@ -1,11 +1,11 @@
 import React from 'react';
-import './Spells.scss';
+import './SpellList.scss';
 
 import SpellCard from '../../components/SpellCard/SpellCard';
 
 import { test_spells } from '../../spellsArray';
 
-const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schools,
+const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schools,
                   schoolsFilterValue }) => {
 
   const spells = test_spells;
@@ -86,4 +86,4 @@ const Spells = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, com
   );
 }
 
-export default Spells;
+export default SpellList;

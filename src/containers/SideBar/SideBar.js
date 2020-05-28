@@ -12,12 +12,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Radio from '@material-ui/core/Radio';
 import Tooltip from '@material-ui/core/Tooltip';
-
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
+import Slider from '@material-ui/core/Slider';
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -28,7 +27,7 @@ import './SideBar.scss';
 
 const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchField, searchFilterValue, language, changeLanguage,
                    setComponentValue, setComponentsMode, componentsModeStrict, schools, onSchoolsChange, schoolsFilterValue,
-                   componentsFilterValue }) => {
+                   componentsFilterValue, onLevelsChange, levelsFilterValue }) => {
 
   const labelsLanguage = label => {
     if (language === 'Русский') {
@@ -61,14 +60,17 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
   const openComponents = () => {
     setComponentsOpened(!componentsOpened);
   };
+
+  const marks = [
+    {value: 0, label: '0'},{value: 1, label: '1'},{value: 2, label: '2'},{value: 3, label: '3'},{value: 4, label: '4'},{value: 5, label: '5'},{value: 6, label: '6'},{value: 7, label: '7'},{value: 8, label: '8'},{value: 9, label: '9'},
+  ];
   
   return (
     <nav className={`sidebar ${isSidebarOpened ? "" : "sidebar-hidden"}`}>
-      <IconButton color="secondary" className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
+      <IconButton className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
       <div className={`sidebar-filters ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>
         
         <TextField
-          variant="filled"
           label={labelsLanguage("search")}
           className='sidebar-component'
           onChange={onSearchChange}
@@ -80,6 +82,18 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
             // edge="end"
           }}
         />
+
+        <FormControl className='sidebar-component levels-component'>
+          {/* <InputLabel>{labelsLanguage("language")}</InputLabel> */}
+          <Slider
+            value={levelsFilterValue}
+            onChange={onLevelsChange}
+            marks={marks}
+            min={0}
+            max={9}
+            valueLabelDisplay="on"
+          />
+        </FormControl>
 
         <List className='sidebar-component'>
           <ListItem button onClick={openSchools}>
@@ -122,22 +136,22 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
             </List>
 
             <List component="div" className='components-collapsible-child'>
-              <Tooltip interactive className='components-tooltip' title={(language === 'Русский') ? "Показывать заклинания с любыми из выбранных компонентов" : "Show spells with any of the selected components"}>
+              <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания с любыми из выбранных компонентов" : "Show spells with any of the selected components"}</span>}>
                 <ListItem button onClick={() => setComponentsMode(0)} >
                   <Radio value={0} checked={componentsModeStrict === 0} />
-                  <ListItemText primary={(language === 'Русский') ? "ИЛИ" : "OR"} />
+                  <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "ИЛИ" : "OR"} />
                 </ListItem>
               </Tooltip>
-              <Tooltip title={(language === 'Русский') ? "Показывать заклинания со ВСЕМИ выбранными компонентами" : "Show spells with ALL selected components"}>
+              <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания со ВСЕМИ выбранными компонентами" : "Show spells with ALL selected components"}</span>}>
                 <ListItem button onClick={() => setComponentsMode(1)}>
                   <Radio value={1} checked={componentsModeStrict === 1} />
-                  <ListItemText primary={(language === 'Русский') ? "И" : "AND"} />
+                  <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "И" : "AND"} />
                 </ListItem>
               </Tooltip>
-              <Tooltip title={(language === 'Русский') ? "Показывать заклинания с ТОЛЬКО выбранными компонентами" : "Show spells with ONLY selected components"}>
+              <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания с ТОЛЬКО выбранными компонентами" : "Show spells with ONLY selected components"}</span>}>
                 <ListItem button onClick={() => setComponentsMode(2)} >
                   <Radio value={2} checked={componentsModeStrict === 2} />
-                  <ListItemText primary={(language === 'Русский') ? "ТОЛЬКО" : "ONLY"} />
+                  <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "=" : "="} />
                 </ListItem>
               </Tooltip>
             </List>

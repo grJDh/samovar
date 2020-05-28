@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
-import red from '@material-ui/core/colors/red';
 
 import './App.scss';
 
-import Spells from './containers/Spells/Spells';
+import SpellList from './containers/SpellList/SpellList';
 import SideBar from './containers/SideBar/SideBar';
 
 import { schools } from './spellsArray';
@@ -16,7 +15,9 @@ const App = () => {
       primary: {
         main: '#fff',
       },
-      secondary: red,
+      secondary: {
+        main: '#fff',
+      },
       type: 'dark',
     },
   });
@@ -53,11 +54,11 @@ const App = () => {
     }
   }
 
-  console.log(schoolsFilterValue);
+  const [levelsFilterValue, setLevelsFilterValue]  = useState([0, 9]);
+  const onLevelsChange = (event, value) => {setLevelsFilterValue(value);console.log(value);}
 
   // classes
   // levels
-  // schools
   // sources
   // rituals
 
@@ -67,21 +68,28 @@ const App = () => {
         <SideBar 
           toggleSidebar={toggleSidebar}
           isSidebarOpened={isSidebarOpened}
+
           changeLanguage={changeLanguage}
+
           onSearchChange={onSearchChange}
           searchFilterValue={searchFilterValue}
           clearSearchField={clearSearchField}
+
           setComponentValue={setComponentValue}
           componentsFilterValue={componentsFilterValue}
           setComponentsMode={setComponentsMode}
           componentsModeStrict={componentsModeStrict}
+
           onSchoolsChange={onSchoolsChange}
           schoolsFilterValue={schoolsFilterValue}
+
+          onLevelsChange={onLevelsChange}
+          levelsFilterValue={levelsFilterValue}
 
           schools={schools}
           language={language}
         />
-        <Spells
+        <SpellList
           isSidebarOpened={isSidebarOpened}
           searchFilterValue={searchFilterValue}
           componentsFilterValue={componentsFilterValue}
