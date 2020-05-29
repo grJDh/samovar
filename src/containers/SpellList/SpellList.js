@@ -79,7 +79,7 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
       if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
         return 1;
       }
-      if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
+      if (spell1[languageProperty()].name < spell2[languageProperty()].name) {
         return -1;
       }
 
@@ -87,10 +87,11 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
       if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
         return 1;
       }
-      if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
+      if (spell1[languageProperty()].name < spell2[languageProperty()].name) {
         return -1;
       }
     }
+
     return 0;
   }
 
@@ -108,12 +109,12 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
   //   spells.filter(spell => spell.source === "SCPC")
   // );
 
-  const cellRenderer = ({columnIndex, key, rowIndex, style, data}) => {
+  const cellRenderer = ({columnIndex, rowIndex, style, data}) => {
     if (filteredSpells.length !== 0) {  
       const index = (Math.floor(rowIndex * data)) + columnIndex;
       if (filteredSpells[index]) {
         return (
-          <div key={key} style={style}>
+          <div style={style}>
             {<SpellCard
               name={filteredSpells[index][languageProperty()].name}
               otherName={filteredSpells[index][languageProperty(true)].name}
