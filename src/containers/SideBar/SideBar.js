@@ -28,7 +28,7 @@ import './SideBar.scss';
 const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchField, searchFilterValue, language, changeLanguage,
                    setComponentValue, setComponentsMode, componentsModeStrict, schools, onSchoolsChange, schoolsFilterValue,
                    componentsFilterValue, onLevelsChange, levelsFilterValue, sources, onSourcesChange, sourcesFilterValue, numberOfSpells,
-                   onSortChange, sortValue }) => {
+                   onSortChange, sortValue, onClassChange, classFilterValue, classes }) => {
 
   const [schoolsOpened, setSchoolsOpened] = useState(false);
   const openSchools = () => {
@@ -66,6 +66,16 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
             // edge="end"
           }}
         />
+        
+        <FormControl variant="filled" className='sidebar-component'>
+          <InputLabel>{(language === 'Русский') ? "Класс" : "Class"}</InputLabel>
+          <Select value={classFilterValue} onChange={onClassChange}>
+            <MenuItem value=''>{(language === 'Русский') ? 'Все классы' : 'All classes'}</MenuItem>
+            {Object.keys(classes).map(item => (
+              <MenuItem value={classes[item].en}>{(language === 'Русский') ? classes[item].ru : classes[item].en}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         <FormControl className='sidebar-component levels-component'>
           <Typography className='levels-title'>{(language === 'Русский') ? "Выберите уровни" : "Choose levels"}</Typography>
@@ -161,7 +171,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
         </List>
 
         <FormControl variant="filled" className='sidebar-component'>
-          <InputLabel>{(language === 'Русский') ? "Выберите язык" : "Choose language"}</InputLabel>
+          <InputLabel>{(language === 'Русский') ? "Язык" : "Language"}</InputLabel>
           <Select value={language} onChange={changeLanguage}>
             <MenuItem value='Русский'>Русский</MenuItem>
             <MenuItem value='English'>English</MenuItem>
@@ -177,7 +187,6 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
         </FormControl>
 
       </div>
-
       <p className={'sidebar-last-spells'}>{'Заклинаний найдено: ' + numberOfSpells}</p>
     </nav>
   );

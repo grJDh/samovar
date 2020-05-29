@@ -7,12 +7,16 @@ import './SpellList.scss';
 
 import SpellCard from '../../components/SpellCard/SpellCard';
 
-import { spells } from '../../spellsArray';
+import { spells, spellsByClasses } from '../../spellsArray';
 
 const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schoolsFilterValue,
-                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue, schools, sources }) => {
+                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue, schools, sources, classFilterValue }) => {
 
-  // const spells = test_spells;
+  const languageProperty = (other = false) => {
+    if (language === 'Русский' ^ other) return "ru";
+    
+    return "en";
+  }
 
   const searchFilter = spell =>
     spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) ||
@@ -61,10 +65,13 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
 
   const levelsFilter = spell => (spell.level >= levelsFilterValue[0] && spell.level <= levelsFilterValue[1]) ? true : false;
 
-  const languageProperty = (other = false) => {
-    if (language === 'Русский' ^ other) return "ru";
-    
-    return "en";
+  const classesFilter = spell => {
+    if (classFilterValue !== '') {
+      for (let i = 0; i < spellsByClasses[classFilterValue].spells.length; i++) {
+        if (spellsByClasses[classFilterValue].spells[i].toLowerCase() === spell.en.name.toLowerCase()) return true
+      };
+      return false
+    } else return true
   }
 
   const spellsSort = (spell1, spell2) => {
@@ -101,13 +108,18 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
   .filter(spell => schoolsFilter(spell))
   .filter(spell => levelsFilter(spell))
   .filter(spell => sourcesFilter(spell))
+  .filter(spell => classesFilter(spell))
   .sort((spell1, spell2) => spellsSort(spell1, spell2))
 
   onNumberOfSpellsChange(filteredSpells.length);
 
-  // console.log(
-  //   spells.filter(spell => spell.source === "SCPC")
-  // );
+  // classes
+  // тултипы для источников на карточках
+  // кнопка вверх
+  // увеличение размера карточек
+  // закреп карточек
+  // папки закрепов
+
 
   const cellRenderer = ({columnIndex, rowIndex, style, data}) => {
     if (filteredSpells.length !== 0) {  
