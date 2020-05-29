@@ -115,7 +115,7 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
   return (
     <div className='spellcard'>
       <div className="spellcard-name section">
-        <Tooltip title={<span className='name-tooltip'>{capitalize(otherName)}</span>} enterDelay={500} arrow>
+        <Tooltip title={<span className='name-tooltip'>{capitalize(otherName)}</span>} enterDelay={300} arrow>
           <h1>{capitalize(name)}</h1>
         </Tooltip>
       </div>
