@@ -6,11 +6,9 @@ import Collapse from '@material-ui/core/Collapse';
 
 import './SpellCard.scss';
 
-const SpellCard = ({ name, castingTime, range, components,
-                    duration, description, materials, source,
-                    classes, level, school, materialCost,
-                    otherName, materialConsumed, higherLevels,
-                    language }) => {
+const SpellCard = ({ name, castingTime, range, components, duration, description, materials, source, level, school, materialCost, otherName,
+                     materialConsumed, higherLevels, language, languageProperty, schools, sources }) => {
+
 
   const levelAdjusted = () => {
     if (level === 0) {
@@ -38,31 +36,6 @@ const SpellCard = ({ name, castingTime, range, components,
         }
       }).join(", ")
     } else return components
-  }
-
-  const schoolLanguage = () => {
-    if (language === 'Русский') {
-      switch(school) {
-        case "Conjuration":
-          return "Призыв";
-        case "Abjuration":
-          return "Ограждение";
-        case "Necromancy":
-          return "Некромантия";
-        case "Evocation":
-          return "Воплощение";
-        case "Enchantment":
-          return "Очарование";
-        case "Transmutation":
-          return "Трансмутация";
-        case "Illusion":
-          return "Иллюзия";
-        case "Divination":
-          return "Прорицание";
-        default:
-          return '???';
-      } 
-    } else return school
   }
 
   const markdown = text => mdReact()(text);
@@ -178,7 +151,7 @@ const SpellCard = ({ name, castingTime, range, components,
       {higherLevelsCheck()}
 
       <div className="spellcard-footer footer">
-        <p>{levelAdjusted()}, {schoolLanguage(school)}</p>
+        <p>{levelAdjusted()}, {schools[school][languageProperty()]}</p>
         <p>{source}</p>
       </div>
     </div>

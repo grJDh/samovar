@@ -10,7 +10,7 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 import { spells } from '../../spellsArray';
 
 const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schoolsFilterValue,
-                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue }) => {
+                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue, schools, sources }) => {
 
   // const spells = test_spells;
 
@@ -131,9 +131,12 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
               school={filteredSpells[index].school}
 
               key={filteredSpells[index].en.name}
+              languageProperty={languageProperty}
               // classes={spell.ru}
 
               language={language}
+              schools={schools}
+              sources={sources}
             />}
           </div>
         );

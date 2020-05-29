@@ -9669,7 +9669,7 @@ export const spells = [
       "duration": "Концентрация до 1 минуты"
     },
     "level": 0,
-    "school": "Conjuration ",
+    "school": "Conjuration",
     "source": "TOEE, XGTE",
     "materialCost": 0,
     "materialConsumed": false,
@@ -9851,7 +9851,7 @@ export const spells = [
       "duration": "Мгновенно"
     },
     "level": 0,
-    "school": "Evocation ",
+    "school": "Evocation",
     "source": "TOEE, XGTE",
     "materialCost": 0,
     "materialConsumed": false,
@@ -10241,7 +10241,7 @@ export const spells = [
       "duration": "мгновенно или 1 час"
     },
     "level": 0,
-    "school": "Transmutation ",
+    "school": "Transmutation",
     "source": "TOEE, XGTE",
     "materialCost": 0,
     "materialConsumed": false,
@@ -10267,7 +10267,7 @@ export const spells = [
       "duration": "Концентрация до 1 часа"
     },
     "level": 2,
-    "school": "Transmutation ",
+    "school": "Transmutation",
     "source": "TOEE, XGTE",
     "materialCost": 0,
     "materialConsumed": false,
@@ -10345,7 +10345,7 @@ export const spells = [
       "duration": "мгновенно"
     },
     "level": 0,
-    "school": "Evocation ",
+    "school": "Evocation",
     "source": "TOEE, XGTE",
     "materialCost": 0,
     "materialConsumed": false,
@@ -12072,7 +12072,7 @@ export const spells = [
       "duration": "мгновенная"
     },
     "level": 6,
-    "school": "conjuratfon",
+    "school": "Conjuration",
     "source": "XGTE",
     "materialCost": 0,
     "materialConsumed": false,
