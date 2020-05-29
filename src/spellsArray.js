@@ -11333,10 +11333,10 @@ export const spells = [
     "level": 1,
     "school": "Abjuration",
     "source": "XGTE",
-    "materialCost": 0,
-    "materialConsumed": false,
+    "materialCost": 25,
+    "materialConsumed": true,
     "classes": "",
-    "ritual": false,
+    "ritual": true,
     "components": "V, S, M"
   },
   {

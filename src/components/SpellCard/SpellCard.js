@@ -1,20 +1,16 @@
-import React from 'react';
-import './SpellCard.scss';
-import { mdReact } from 'markdown-react-js';
-import { Tooltip } from '@rmwc/tooltip';
-import { CollapsibleList } from '@rmwc/list';
+import React, { useState } from 'react';
 
-import '@rmwc/tooltip/tooltip.css';
-import '@material/list/dist/mdc.list.css';
-import '@rmwc/list/collapsible-list.css';
+import { mdReact } from 'markdown-react-js';
+import Tooltip from '@material-ui/core/Tooltip';
+import Collapse from '@material-ui/core/Collapse';
+
+import './SpellCard.scss';
 
 const SpellCard = ({ name, castingTime, range, components,
                     duration, description, materials, source,
                     classes, level, school, materialCost,
                     otherName, materialConsumed, higherLevels,
                     language }) => {
-
-  const useCollapse = true;
 
   const levelAdjusted = () => {
     if (level === 0) {
@@ -90,6 +86,11 @@ const SpellCard = ({ name, castingTime, range, components,
     }
   }
 
+  const useCollapse = true;
+
+  const [isOpened, setOpened] = useState(false);
+  const toggleMaterials = () => setOpened(!isOpened);
+
   const materialCollapsible = () => {
     if (!useCollapse) {
       return <p className='materials'>{materials}</p>
@@ -98,23 +99,31 @@ const SpellCard = ({ name, castingTime, range, components,
     if (materialCost) {
       return (
         <div>
-          <CollapsibleList handle={(language === 'Русский') ?
-            <p className='material-collapse'>Стоимость комп-тов {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " зм"}</span></p> :
+          {/* <CollapsibleList handle={(language === 'Русский') ?
+            <p className='material-collapse'>Стоим-ть компонентов {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " зм"}</span></p> :
             <p className='material-collapse'>Materials cost {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " gp"}</span></p>}
           >
             <p className='material-collapse-child'>{materials}</p>
-          </CollapsibleList>
+          </CollapsibleList> */}
+
+          {(language === 'Русский') ?
+          <p onClick={toggleMaterials}  className='material-collapse'>Стоим-ть компонентов {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " зм"}</span></p> :
+          <p onClick={toggleMaterials}  className='material-collapse'>Materials cost {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " gp"}</span></p>}
+
+          <Collapse in={isOpened} timeout="auto" >
+            <p className='material-collapse-child'>{materials}</p>
+          </Collapse>
         </div>
       );
     } else {
       return (
         <div>
-          {/* className='material-collapse-div' */}
-          <CollapsibleList  handle={<p className='material-collapse'>{(language === 'Русский') ? "Нажмите, чтобы увидеть мат. комп-т" :
-          "Click to see material component"}</p>}
-          >
+          {<p onClick={toggleMaterials} className='material-collapse'>{(language === 'Русский') ?
+          "Нажмите, чтобы увидеть мат. комп-т" : "Click to see material component"}</p>}
+
+          <Collapse in={isOpened} timeout="auto" >
             <p className='material-collapse-child'>{materials}</p>
-          </CollapsibleList>
+          </Collapse>
         </div>
       );
     }
@@ -133,7 +142,7 @@ const SpellCard = ({ name, castingTime, range, components,
   return (
     <div className='spellcard'>
       <div className="spellcard-name section">
-        <Tooltip className='tooltiptext' content={capitalize(otherName)} showArrow align='bottom' enterDelay="300" activateOn="click">
+        <Tooltip title={<span className='name-tooltip'>{capitalize(otherName)}</span>} enterDelay={500} arrow>
           <h1>{capitalize(name)}</h1>
         </Tooltip>
       </div>

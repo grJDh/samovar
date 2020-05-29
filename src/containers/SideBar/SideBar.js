@@ -51,10 +51,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
   
   return (
     <nav className={`sidebar ${isSidebarOpened ? "" : "sidebar-hidden"}`}>
-      <div className='sidebar-first'>
-        <IconButton className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
-        <p className={`sidebar-spellNum ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>{numberOfSpells}</p>
-      </div>
+      <IconButton className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
       <div className={`sidebar-filters ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>
         
         <TextField
@@ -180,6 +177,8 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
         </FormControl>
 
       </div>
+
+      <p className={'sidebar-last-spells'}>{'Заклинаний найдено: ' + numberOfSpells}</p>
     </nav>
   );
 }
