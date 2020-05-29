@@ -10,7 +10,7 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 import { spells } from '../../spellsArray';
 
 const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schoolsFilterValue,
-                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange }) => {
+                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue }) => {
 
   // const spells = test_spells;
 
@@ -67,12 +67,40 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
     return "en";
   }
 
+  const spellsSort = (spell1, spell2) => {
+    if (sortValue === 0) {
+      if (spell1.level > spell2.level) {
+        return 1;
+      }
+      if (spell1.level < spell2.level) {
+        return -1;
+      }
+
+      if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
+        return 1;
+      }
+      if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
+        return -1;
+      }
+
+    } else {
+      if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
+        return 1;
+      }
+      if (spell1[languageProperty()].name > spell2[languageProperty()].name) {
+        return -1;
+      }
+    }
+    return 0;
+  }
+
   const filteredSpells = spells
   .filter(spell => searchFilter(spell))
   .filter(spell => componentsFilter(spell))
   .filter(spell => schoolsFilter(spell))
   .filter(spell => levelsFilter(spell))
   .filter(spell => sourcesFilter(spell))
+  .sort((spell1, spell2) => spellsSort(spell1, spell2))
 
   onNumberOfSpellsChange(filteredSpells.length);
 

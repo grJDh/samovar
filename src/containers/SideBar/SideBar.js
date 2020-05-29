@@ -27,29 +27,8 @@ import './SideBar.scss';
 
 const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchField, searchFilterValue, language, changeLanguage,
                    setComponentValue, setComponentsMode, componentsModeStrict, schools, onSchoolsChange, schoolsFilterValue,
-                   componentsFilterValue, onLevelsChange, levelsFilterValue, sources, onSourcesChange, sourcesFilterValue, numberOfSpells }) => {
-
-  const labelsLanguage = label => {
-    if (language === 'Русский') {
-      switch(label) {
-        case "search":
-          return "Введите название";
-        case "language":
-          return "Выберите язык";
-        default:
-          return '???';
-      } 
-    } else {
-      switch(label) {
-        case "search":
-          return "Enter spell name";
-        case "language":
-          return "Choose language";
-        default:
-          return '???';
-      }
-    }
-  }
+                   componentsFilterValue, onLevelsChange, levelsFilterValue, sources, onSourcesChange, sourcesFilterValue, numberOfSpells,
+                   onSortChange, sortValue }) => {
 
   const [schoolsOpened, setSchoolsOpened] = useState(false);
   const openSchools = () => {
@@ -79,7 +58,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
       <div className={`sidebar-filters ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>
         
         <TextField
-          label={labelsLanguage("search")}
+          label={(language === 'Русский') ? "Введите название" : "Enter spell name"}
           className='sidebar-component'
           onChange={onSearchChange}
           value={searchFilterValue}
@@ -185,12 +164,21 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
         </List>
 
         <FormControl variant="filled" className='sidebar-component'>
-          <InputLabel>{labelsLanguage("language")}</InputLabel>
+          <InputLabel>{(language === 'Русский') ? "Выберите язык" : "Choose language"}</InputLabel>
           <Select value={language} onChange={changeLanguage}>
             <MenuItem value='Русский'>Русский</MenuItem>
             <MenuItem value='English'>English</MenuItem>
           </Select>
         </FormControl>
+
+        <FormControl variant="filled" className='sidebar-component'>
+          <InputLabel>{(language === 'Русский') ? "Сортировка" : "Sort"}</InputLabel>
+          <Select value={sortValue} onChange={onSortChange}>
+            <MenuItem value={0}>По уровню и алфавиту</MenuItem>
+            <MenuItem value={1}>По алфавиту</MenuItem>
+          </Select>
+        </FormControl>
+
       </div>
     </nav>
   );

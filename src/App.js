@@ -55,7 +55,7 @@ const App = () => {
   }
 
   const [levelsFilterValue, setLevelsFilterValue]  = useState([0, 9]);
-  const onLevelsChange = (event, value) => {setLevelsFilterValue(value);console.log(value);}
+  const onLevelsChange = (event, value) => setLevelsFilterValue(value);
 
   const [sourcesFilterValue, setSourcesFilterValue] = useState(['PHB', 'XGTE', 'TOEE', 'SCAG']);
   const onSourcesChange = source => {
@@ -69,6 +69,9 @@ const App = () => {
 
   const [numberOfSpells, setNumberOfSpells] = useState(0);
   const onNumberOfSpellsChange = value => setNumberOfSpells(value);
+
+  const [sortValue, setSortValue] = useState(0);
+  const onSortChange = event => setSortValue(event.target.value); 
 
   // classes
   // rituals
@@ -100,6 +103,9 @@ const App = () => {
           onSourcesChange={onSourcesChange}
           sourcesFilterValue={sourcesFilterValue}
 
+          sortValue={sortValue}
+          onSortChange={onSortChange}
+
           schools={schools}
           sources={sources}
           language={language}
@@ -118,6 +124,7 @@ const App = () => {
           schools={schools}
           sources={sources}
           onNumberOfSpellsChange={onNumberOfSpellsChange}
+          sortValue={sortValue}
         />
       </main>
     </ThemeProvider>
