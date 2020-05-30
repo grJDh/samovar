@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/samovar/static/css/main.836c92a1.chunk.css",
+    "main.js": "/samovar/static/js/main.3f08ed7d.chunk.js",
+    "main.js.map": "/samovar/static/js/main.3f08ed7d.chunk.js.map",
+    "runtime-main.js": "/samovar/static/js/runtime-main.d4a8d443.js",
+    "runtime-main.js.map": "/samovar/static/js/runtime-main.d4a8d443.js.map",
+    "static/js/2.cc0fa581.chunk.js": "/samovar/static/js/2.cc0fa581.chunk.js",
+    "static/js/2.cc0fa581.chunk.js.map": "/samovar/static/js/2.cc0fa581.chunk.js.map",
+    "index.html": "/samovar/index.html",
+    "precache-manifest.34950300e9dd8e46e43ecf7617db48cf.js": "/samovar/precache-manifest.34950300e9dd8e46e43ecf7617db48cf.js",
+    "service-worker.js": "/samovar/service-worker.js",
+    "static/css/main.836c92a1.chunk.css.map": "/samovar/static/css/main.836c92a1.chunk.css.map",
+    "static/js/2.cc0fa581.chunk.js.LICENSE.txt": "/samovar/static/js/2.cc0fa581.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d4a8d443.js",
+    "static/js/2.cc0fa581.chunk.js",
+    "static/css/main.836c92a1.chunk.css",
+    "static/js/main.3f08ed7d.chunk.js"
+  ]
+}
