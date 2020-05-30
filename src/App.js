@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createMuiTheme, ThemeProvider  } from '@material-ui/core/styles';
 
 import './App.scss';
@@ -6,7 +6,7 @@ import './App.scss';
 import SpellList from './containers/SpellList/SpellList';
 import SideBar from './containers/SideBar/SideBar';
 
-import { schools, sources, classes } from './spellsArray';
+import { schools, sources } from './spellsArray';
 
 const App = () => {
 
@@ -104,12 +104,6 @@ const App = () => {
     placeToLocalStorage('sortValue', event.target.value);
   }
 
-  const [classFilterValue, setClassFilterValue] = useState(checkLocalStorage('classFilterValue', ''));
-  const onClassChange = event => {
-    setClassFilterValue(event.target.value);
-    placeToLocalStorage('classFilterValue', event.target.value);
-  }
-
   // classes
   // rituals
 
@@ -140,16 +134,12 @@ const App = () => {
           onSourcesChange={onSourcesChange}
           sourcesFilterValue={sourcesFilterValue}
 
-          onClassChange={onClassChange}
-          classFilterValue={classFilterValue}
-
           sortValue={sortValue}
           onSortChange={onSortChange}
 
           schools={schools}
           sources={sources}
           language={language}
-          classes={classes}
           numberOfSpells={numberOfSpells}
         />
         <SpellList
@@ -160,7 +150,6 @@ const App = () => {
           schoolsFilterValue={schoolsFilterValue}
           levelsFilterValue={levelsFilterValue}
           sourcesFilterValue={sourcesFilterValue}
-          classFilterValue={classFilterValue}
 
           language={language}
           schools={schools}

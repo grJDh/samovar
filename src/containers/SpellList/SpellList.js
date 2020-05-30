@@ -7,16 +7,12 @@ import './SpellList.scss';
 
 import SpellCard from '../../components/SpellCard/SpellCard';
 
-import { spells, spellsByClasses } from '../../spellsArray';
+import { spells } from '../../spellsArray';
 
 const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schoolsFilterValue,
-                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue, schools, sources, classFilterValue }) => {
+                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue, schools, sources }) => {
 
-  const languageProperty = (other = false) => {
-    if (language === 'Русский' ^ other) return "ru";
-    
-    return "en";
-  }
+  // const spells = test_spells;
 
   const searchFilter = spell =>
     spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) ||
@@ -65,13 +61,10 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
 
   const levelsFilter = spell => (spell.level >= levelsFilterValue[0] && spell.level <= levelsFilterValue[1]) ? true : false;
 
-  const classesFilter = spell => {
-    if (classFilterValue !== '') {
-      for (let i = 0; i < spellsByClasses[classFilterValue].spells.length; i++) {
-        if (spellsByClasses[classFilterValue].spells[i].toLowerCase() === spell.en.name.toLowerCase()) return true
-      };
-      return false
-    } else return true
+  const languageProperty = (other = false) => {
+    if (language === 'Русский' ^ other) return "ru";
+    
+    return "en";
   }
 
   const spellsSort = (spell1, spell2) => {
@@ -108,7 +101,6 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
   .filter(spell => schoolsFilter(spell))
   .filter(spell => levelsFilter(spell))
   .filter(spell => sourcesFilter(spell))
-  .filter(spell => classesFilter(spell))
   .sort((spell1, spell2) => spellsSort(spell1, spell2))
 
   onNumberOfSpellsChange(filteredSpells.length);
