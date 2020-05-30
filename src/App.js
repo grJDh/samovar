@@ -28,6 +28,7 @@ const App = () => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(true);
   const toggleSidebar = () => setIsSidebarOpened(!isSidebarOpened);
 
+  // navigator.language || navigator.userLanguage
   const [language, setLanguage] = useState(checkLocalStorage('language', 'Русский'));
   const changeLanguage = event => {
     setLanguage(event.target.value);

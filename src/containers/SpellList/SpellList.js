@@ -113,13 +113,18 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
 
   onNumberOfSpellsChange(filteredSpells.length);
 
-  // classes
+  //переписать на redux'е
+  
+  // время
+  // дистанция
+  // длительность
+
   // тултипы для источников на карточках
   // кнопка вверх
   // увеличение размера карточек
   // закреп карточек
   // папки закрепов
-
+  // новые виды карточек
 
   const cellRenderer = ({columnIndex, rowIndex, style, data}) => {
     if (filteredSpells.length !== 0) {  

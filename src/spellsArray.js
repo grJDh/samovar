@@ -2234,7 +2234,8 @@ export const spellsByClasses = {
     "Time Stop",
     "True Polymorph",
     "Weird",
-    "Wish"
+    "Wish",
+    "Invulnerability"
 		]
 
 	}

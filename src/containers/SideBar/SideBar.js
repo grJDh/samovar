@@ -181,8 +181,8 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
         <FormControl variant="filled" className='sidebar-component'>
           <InputLabel>{(language === 'Русский') ? "Сортировка" : "Sort"}</InputLabel>
           <Select value={sortValue} onChange={onSortChange}>
-            <MenuItem value={0}>По уровню и алфавиту</MenuItem>
-            <MenuItem value={1}>По алфавиту</MenuItem>
+            <MenuItem value={0}>{(language === 'Русский') ? "По уровню и алфавиту" : "Sort by level and alphabet"}</MenuItem>
+            <MenuItem value={1}>{(language === 'Русский') ? "По алфавиту" : "Sort alphabetically"}</MenuItem>
           </Select>
         </FormControl>
 
