@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -25,11 +26,35 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import './SideBar.scss';
 
-const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchField, searchFilterValue, language, changeLanguage,
-                   setComponentValue, setComponentsMode, componentsModeStrict, schools, onSchoolsChange, schoolsFilterValue,
-                   componentsFilterValue, onLevelsChange, levelsFilterValue, sources, onSourcesChange, sourcesFilterValue, numberOfSpells,
-                   onSortChange, sortValue }) => {
+import { filtersSelector, toggleSidebar, changeLanguage, changeSearchField, clearSearchField, setComponentValue, setComponentsMode,
+         changeSchools, setLevelsValue, changeSources, changeSort } from '../../slices/filters';
 
+const SideBar = ({ schools, sources }) => {
+
+  const dispatch = useDispatch();
+  const { isSidebarOpened, language, searchFilterValue, componentsFilterValue, componentsModeStrict, schoolsFilterValue, levelsFilterValue,
+          sourcesFilterValue, numberOfSpells, sortValue } = useSelector(filtersSelector);
+
+  const onSidebarToggle = () => dispatch(toggleSidebar());
+
+  const onLanguageChange = event => dispatch(changeLanguage(event.target.value));
+
+  const onSearchChange = event => dispatch(changeSearchField(event.target.value));
+  const onSearchClear = () => dispatch(clearSearchField());
+
+  const onComponentsValueSet = value => dispatch(setComponentValue(value));
+  const onComponentsModeSet = value => dispatch(setComponentsMode(value));
+
+  const onSchoolsChange = value => dispatch(changeSchools(value));
+
+  const onLevelsChange = (event, whichSelect) => whichSelect ? dispatch(setLevelsValue([levelsFilterValue[0], event.target.value]))
+  : dispatch(setLevelsValue([event.target.value, levelsFilterValue[1]]));
+
+  const onSourcesChange = value => dispatch(changeSources(value));
+
+  const onSortChange = event => dispatch(changeSort(event.target.value));
+  
+  
   const [schoolsOpened, setSchoolsOpened] = useState(false);
   const openSchools = () => {
     setSchoolsOpened(!schoolsOpened);
@@ -44,14 +69,10 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
   const openSources = () => {
     setSourcesOpened(!sourcesOpened);
   };
-
-  const marks = [
-    {value: 0, label: '0'},{value: 1, label: '1'},{value: 2, label: '2'},{value: 3, label: '3'},{value: 4, label: '4'},{value: 5, label: '5'},{value: 6, label: '6'},{value: 7, label: '7'},{value: 8, label: '8'},{value: 9, label: '9'},
-  ];
   
   return (
     <nav className={`sidebar ${isSidebarOpened ? "" : "sidebar-hidden"}`}>
-      <IconButton className='sidebar-button' onClick={toggleSidebar}><Icon>menu</Icon></IconButton>
+      <IconButton className='sidebar-button' onClick={onSidebarToggle}><Icon>menu</Icon></IconButton>
       <div className={`sidebar-filters ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>
         
         <TextField
@@ -62,23 +83,55 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
           multiline
           InputProps={{
             startAdornment: <InputAdornment position="start"><SearchIcon /></InputAdornment>,
-            endAdornment: <InputAdornment position="end"><IconButton onClick={() => clearSearchField()}><CloseIcon /></IconButton></InputAdornment>
+            endAdornment: <InputAdornment position="end"><IconButton onClick={onSearchClear}><CloseIcon /></IconButton></InputAdornment>
             // edge="end"
           }}
         />
 
-        <FormControl className='sidebar-component levels-component'>
-          <Typography className='levels-title'>{(language === 'Русский') ? "Выберите уровни" : "Choose levels"}</Typography>
-          <Slider
-            value={levelsFilterValue}
-            onChange={onLevelsChange}
-            marks={marks}
-            min={0}
-            max={9}
-            valueLabelDisplay="on"
-          />
+        <div className='sidebar-component levels-component'>
+          <Typography>{(language === 'Русский') ? "Выберите уровни" : "Choose levels"}</Typography>
+            <div className='sidebar-component levels-component-selects'>
+            <FormControl variant="filled">
+              {/* <Slider
+                value={levelsFilterValue}
+                onChange={onLevelsChange}
+                marks={marks}
+                min={0}
+                max={9}
+                valueLabelDisplay="on"
+              /> */}
+              <InputLabel>{(language === 'Русский') ? "C" : "From"}</InputLabel>
+              <Select value={levelsFilterValue[0]} onChange={(event) => onLevelsChange(event, 0)}>
+                <MenuItem value={0}>0</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={9}>9</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl variant="filled">
+              <InputLabel>{(language === 'Русский') ? "По" : "To"}</InputLabel>
+              <Select value={levelsFilterValue[1]} onChange={(event) => onLevelsChange(event, 1)}>
+                <MenuItem value={0}>0</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={9}>9</MenuItem>
+              </Select>
         </FormControl>
-
+          </div>
+        </div>
+        
         <List className='sidebar-component'>
           <ListItem button onClick={openSchools}>
             <ListItemText primary={(language === 'Русский') ? "Школы" : "Schools"} />
@@ -105,15 +158,15 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
 
           <Collapse in={componentsOpened} timeout="auto" >
             <List component="div" className='components-collapsible-child'>
-              <ListItem button onClick={() => setComponentValue("V")}>
+              <ListItem button onClick={() => onComponentsValueSet("V")}>
                 <Checkbox checked={componentsFilterValue.includes("V")} />
                 <ListItemText primary={(language === 'Русский') ? "В" : "V"} />
               </ListItem>
-              <ListItem button onClick={() => setComponentValue("S")}>
+              <ListItem button onClick={() => onComponentsValueSet("S")}>
                 <Checkbox checked={componentsFilterValue.includes("S")} />
                 <ListItemText primary={(language === 'Русский') ? "С" : "S"} />
               </ListItem>
-              <ListItem button onClick={() => setComponentValue("M")} >
+              <ListItem button onClick={() => onComponentsValueSet("M")} >
                 <Checkbox checked={componentsFilterValue.includes("M")}  />
                 <ListItemText primary={(language === 'Русский') ? "М" : "M"} />
               </ListItem>
@@ -121,19 +174,19 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
 
             <List component="div" className='components-collapsible-child'>
               <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания с любыми из выбранных компонентов" : "Show spells with any of the selected components"}</span>}>
-                <ListItem button onClick={() => setComponentsMode(0)} >
+                <ListItem button onClick={() => onComponentsModeSet(0)} >
                   <Radio value={0} checked={componentsModeStrict === 0} />
                   <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "ИЛИ" : "OR"} />
                 </ListItem>
               </Tooltip>
               <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания со ВСЕМИ выбранными компонентами" : "Show spells with ALL selected components"}</span>}>
-                <ListItem button onClick={() => setComponentsMode(1)}>
+                <ListItem button onClick={() => onComponentsModeSet(1)}>
                   <Radio value={1} checked={componentsModeStrict === 1} />
                   <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "И" : "AND"} />
                 </ListItem>
               </Tooltip>
               <Tooltip title={<span className='components-tooltip' >{(language === 'Русский') ? "Показывать заклинания ТОЛЬКО с выбранными компонентами" : "Show spells with ONLY selected components"}</span>}>
-                <ListItem button onClick={() => setComponentsMode(2)} >
+                <ListItem button onClick={() => onComponentsModeSet(2)} >
                   <Radio value={2} checked={componentsModeStrict === 2} />
                   <ListItemText className='components-collapsible-child-mode' primary={(language === 'Русский') ? "=" : "="} />
                 </ListItem>
@@ -162,7 +215,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
 
         <FormControl variant="filled" className='sidebar-component'>
           <InputLabel>{(language === 'Русский') ? "Выберите язык" : "Choose language"}</InputLabel>
-          <Select value={language} onChange={changeLanguage}>
+          <Select value={language} onChange={onLanguageChange}>
             <MenuItem value='Русский'>Русский</MenuItem>
             <MenuItem value='English'>English</MenuItem>
           </Select>
@@ -178,7 +231,7 @@ const SideBar = ({ isSidebarOpened, toggleSidebar, onSearchChange, clearSearchFi
 
       </div>
 
-      <p className={'sidebar-last-spells'}>{'Заклинаний найдено: ' + numberOfSpells}</p>
+      {/* <p className={`sidebar-last-spells ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>{'Заклинаний найдено: ' + numberOfSpells}</p> */}
     </nav>
   );
 }

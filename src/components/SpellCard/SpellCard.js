@@ -72,13 +72,6 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
     if (materialCost) {
       return (
         <div>
-          {/* <CollapsibleList handle={(language === 'Русский') ?
-            <p className='material-collapse'>Стоим-ть компонентов {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " зм"}</span></p> :
-            <p className='material-collapse'>Materials cost {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " gp"}</span></p>}
-          >
-            <p className='material-collapse-child'>{materials}</p>
-          </CollapsibleList> */}
-
           {(language === 'Русский') ?
           <p onClick={toggleMaterials}  className='material-collapse'>Стоим-ть компонентов {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " зм"}</span></p> :
           <p onClick={toggleMaterials}  className='material-collapse'>Materials cost {doesConsume()}: <span style={{fontWeight: "bold"}}>{materialCost + " gp"}</span></p>}

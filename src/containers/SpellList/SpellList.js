@@ -1,24 +1,26 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { FixedSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 
-import './SpellList.scss';
-
 import SpellCard from '../../components/SpellCard/SpellCard';
+
+import './SpellList.scss';
 
 import { spells } from '../../spellsArray';
 
-const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, componentsModeStrict, language, schoolsFilterValue,
-                     levelsFilterValue, sourcesFilterValue, onNumberOfSpellsChange, sortValue, schools, sources }) => {
+import { filtersSelector } from '../../slices/filters';
 
-  // const spells = test_spells;
+const SpellList = ({ schools, sources }) => {
+
+  const { isSidebarOpened, language, searchFilterValue, componentsFilterValue, componentsModeStrict, schoolsFilterValue, levelsFilterValue,
+          sourcesFilterValue, sortValue } = useSelector(filtersSelector);
 
   const searchFilter = spell =>
     spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) ||
     spell.en.name.toLowerCase().includes(searchFilterValue.toLowerCase());
 
-  // или (любой из) / и (все) / только эти
   const componentsFilter = spell => {
     if (componentsFilterValue.length) {
       switch(componentsModeStrict) {
@@ -29,8 +31,8 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
           };
           return flags === componentsFilterValue.length ?  true :  false
         case 2:
-          const splittedComponents = spell.components.split(", ");
-          const componentsFilterValueCopy = componentsFilterValue;
+          const splittedComponents = spell.components.split(", ").slice();
+          const componentsFilterValueCopy = componentsFilterValue.slice();
           splittedComponents.sort();
           componentsFilterValueCopy.sort();
 
@@ -97,15 +99,13 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
 
   const filteredSpells = spells
   .filter(spell => searchFilter(spell))
-  .filter(spell => componentsFilter(spell))
   .filter(spell => schoolsFilter(spell))
   .filter(spell => levelsFilter(spell))
+  .filter(spell => componentsFilter(spell))
   .filter(spell => sourcesFilter(spell))
   .sort((spell1, spell2) => spellsSort(spell1, spell2))
 
-  onNumberOfSpellsChange(filteredSpells.length);
-
-  //переписать на redux'е
+  // onNumberOfSpellsChange(filteredSpells.length);
   
   // время
   // дистанция
@@ -158,7 +158,6 @@ const SpellList = ({ isSidebarOpened, searchFilterValue, componentsFilterValue, 
 
   return (
     <div className={`spell-table ${isSidebarOpened ? "" : "spells-wide"}`}>
-
           <AutoSizer>
           {({ height, width }) => (
             <Grid

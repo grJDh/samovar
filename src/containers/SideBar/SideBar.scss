@@ -12,6 +12,9 @@ $sidebar-transition: width 0.5s ease-in-out;
 
   display: flex;
   flex-direction: column;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar-hidden {
@@ -59,10 +62,6 @@ $sidebar-transition: width 0.5s ease-in-out;
 
   &.MuiFormControl-root {
     margin: 10px;
-
-    &.levels-component {
-      margin: 10px 20px 10px 20px;
-    }
   }
 
   &.MuiList-root {
@@ -73,6 +72,21 @@ $sidebar-transition: width 0.5s ease-in-out;
 
   &.MuiList-padding {
     padding: 0;
+  }
+}
+
+.levels-component {
+  display: flex;
+  flex-direction: column;
+}
+
+.levels-component-selects {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+
+  .MuiFormControl-root {
+    flex: 1;
   }
 }
 
@@ -100,8 +114,6 @@ $sidebar-transition: width 0.5s ease-in-out;
   margin: 0 10px 0 10px;
 }
 
-.levels-title {
-  &.MuiTypography-root {
-    margin-bottom: 40px;
-  }
+.MuiMenu-paper {
+  transition-duration: 0s !important;
 }
