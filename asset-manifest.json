@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/samovar/static/css/main.836c92a1.chunk.css",
-    "main.js": "/samovar/static/js/main.3f08ed7d.chunk.js",
-    "main.js.map": "/samovar/static/js/main.3f08ed7d.chunk.js.map",
+    "main.css": "/samovar/static/css/main.bc3bf052.chunk.css",
+    "main.js": "/samovar/static/js/main.6be2c3f1.chunk.js",
+    "main.js.map": "/samovar/static/js/main.6be2c3f1.chunk.js.map",
     "runtime-main.js": "/samovar/static/js/runtime-main.d4a8d443.js",
     "runtime-main.js.map": "/samovar/static/js/runtime-main.d4a8d443.js.map",
-    "static/js/2.cc0fa581.chunk.js": "/samovar/static/js/2.cc0fa581.chunk.js",
-    "static/js/2.cc0fa581.chunk.js.map": "/samovar/static/js/2.cc0fa581.chunk.js.map",
+    "static/js/2.295b2ca3.chunk.js": "/samovar/static/js/2.295b2ca3.chunk.js",
+    "static/js/2.295b2ca3.chunk.js.map": "/samovar/static/js/2.295b2ca3.chunk.js.map",
     "index.html": "/samovar/index.html",
-    "precache-manifest.34950300e9dd8e46e43ecf7617db48cf.js": "/samovar/precache-manifest.34950300e9dd8e46e43ecf7617db48cf.js",
+    "precache-manifest.f3a20a0a6ad4f630b5607cf8dac26eb2.js": "/samovar/precache-manifest.f3a20a0a6ad4f630b5607cf8dac26eb2.js",
     "service-worker.js": "/samovar/service-worker.js",
-    "static/css/main.836c92a1.chunk.css.map": "/samovar/static/css/main.836c92a1.chunk.css.map",
-    "static/js/2.cc0fa581.chunk.js.LICENSE.txt": "/samovar/static/js/2.cc0fa581.chunk.js.LICENSE.txt"
+    "static/css/main.bc3bf052.chunk.css.map": "/samovar/static/css/main.bc3bf052.chunk.css.map",
+    "static/js/2.295b2ca3.chunk.js.LICENSE.txt": "/samovar/static/js/2.295b2ca3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d4a8d443.js",
-    "static/js/2.cc0fa581.chunk.js",
-    "static/css/main.836c92a1.chunk.css",
-    "static/js/main.3f08ed7d.chunk.js"
+    "static/js/2.295b2ca3.chunk.js",
+    "static/css/main.bc3bf052.chunk.css",
+    "static/js/main.6be2c3f1.chunk.js"
   ]
 }
