@@ -231,7 +231,7 @@ const SideBar = ({ schools, sources }) => {
 
       </div>
 
-      {/* <p className={`sidebar-last-spells ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>{'Заклинаний найдено: ' + numberOfSpells}</p> */}
+      <p className={`sidebar-last-spells ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>{(language === 'Русский') ? 'Заклинаний найдено: ' + numberOfSpells : "Spells found: " + numberOfSpells}</p>
     </nav>
   );
 }

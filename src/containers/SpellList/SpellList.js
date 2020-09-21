@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FixedSizeGrid as Grid } from 'react-window';
@@ -10,9 +10,13 @@ import './SpellList.scss';
 
 import { spells } from '../../spellsArray';
 
-import { filtersSelector } from '../../slices/filters';
+import { filtersSelector, changeNumberOfSpells } from '../../slices/filters';
 
 const SpellList = ({ schools, sources }) => {
+
+  const dispatch = useDispatch();
+
+  const onNumberOfSpellsChange = () =>{dispatch(changeNumberOfSpells(filteredSpells.length));}
 
   const { isSidebarOpened, language, searchFilterValue, componentsFilterValue, componentsModeStrict, schoolsFilterValue, levelsFilterValue,
           sourcesFilterValue, sortValue } = useSelector(filtersSelector);
@@ -105,7 +109,9 @@ const SpellList = ({ schools, sources }) => {
   .filter(spell => sourcesFilter(spell))
   .sort((spell1, spell2) => spellsSort(spell1, spell2))
 
-  // onNumberOfSpellsChange(filteredSpells.length);
+  useEffect(() => {
+    onNumberOfSpellsChange();
+  }, [filteredSpells.length])
   
   // время
   // дистанция

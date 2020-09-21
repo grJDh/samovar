@@ -19,7 +19,7 @@ export const initialState = {
 
   sourcesFilterValue: checkLocalStorage('sourcesFilterValue', ['PHB', 'XGTE', 'TOEE', 'SCAG']),
 
-  // numberOfSpells: checkLocalStorage('numberOfSpells', 0),
+  numberOfSpells: 0,
 
   sortValue: checkLocalStorage('sortValue', 0)
 }
@@ -89,10 +89,10 @@ const filtersSlice = createSlice({
       }
     },
 
-    // changeSources: (state, { payload }) => {
-    //   state.numberOfSpells = payload;
-    //   placeToLocalStorage('numberOfSpells', payload);
-    // },
+    changeNumberOfSpells: (state, { payload }) => {
+      state.numberOfSpells = payload;
+      // placeToLocalStorage('numberOfSpells', payload);
+    },
 
     changeSort: (state, { payload }) => {
       state.sortValue = payload;
@@ -102,7 +102,7 @@ const filtersSlice = createSlice({
 });
 
 export const { toggleSidebar, changeLanguage, changeSearchField, clearSearchField, setComponentValue, setComponentsMode, changeSchools,
-               setLevelsValue, changeSources, changeSort } = filtersSlice.actions;
+               setLevelsValue, changeSources, changeNumberOfSpells, changeSort } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 
