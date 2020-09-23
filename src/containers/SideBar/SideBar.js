@@ -23,17 +23,24 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import ReplayIcon from '@material-ui/icons/Replay';
 
 import './SideBar.scss';
 
 import { filtersSelector, toggleSidebar, changeLanguage, changeSearchField, clearSearchField, setComponentValue, setComponentsMode,
-         changeSchools, setLevelsValue, changeSources, changeSort } from '../../slices/filters';
+         changeSchools, setLevelsValue, changeSources, changeSort, changeClasses } from '../../slices/filters';
+
+import { changeCardsWidth, changeCardsHeight } from '../../slices/cards';
+
+import { classes } from '../../spellsArray';
 
 const SideBar = ({ schools, sources }) => {
 
   const dispatch = useDispatch();
   const { isSidebarOpened, language, searchFilterValue, componentsFilterValue, componentsModeStrict, schoolsFilterValue, levelsFilterValue,
-          sourcesFilterValue, numberOfSpells, sortValue } = useSelector(filtersSelector);
+          sourcesFilterValue, numberOfSpells, sortValue, classesFilterValue } = useSelector(filtersSelector);
 
   const onSidebarToggle = () => dispatch(toggleSidebar());
 
@@ -45,6 +52,8 @@ const SideBar = ({ schools, sources }) => {
   const onComponentsValueSet = value => dispatch(setComponentValue(value));
   const onComponentsModeSet = value => dispatch(setComponentsMode(value));
 
+  const onClassesChange = value => dispatch(changeClasses(value));
+
   const onSchoolsChange = value => dispatch(changeSchools(value));
 
   const onLevelsChange = (event, whichSelect) => whichSelect ? dispatch(setLevelsValue([levelsFilterValue[0], event.target.value]))
@@ -53,7 +62,14 @@ const SideBar = ({ schools, sources }) => {
   const onSourcesChange = value => dispatch(changeSources(value));
 
   const onSortChange = event => dispatch(changeSort(event.target.value));
+
+  const onChangeCardsWidth = value => dispatch(changeCardsWidth(value));
+  const onChangeCardsHeight = value => dispatch(changeCardsHeight(value));
   
+  const [classesOpened, setClassesOpened] = useState(false);
+  const openClasses = () => {
+    setClassesOpened(!classesOpened);
+  };
   
   const [schoolsOpened, setSchoolsOpened] = useState(false);
   const openSchools = () => {
@@ -68,6 +84,11 @@ const SideBar = ({ schools, sources }) => {
   const [sourcesOpened, setSourcesOpened] = useState(false);
   const openSources = () => {
     setSourcesOpened(!sourcesOpened);
+  };
+
+  const [settingsOpened, setSettingsOpened] = useState(false);
+  const openSettings = () => {
+    setSettingsOpened(!settingsOpened);
   };
   
   return (
@@ -88,7 +109,25 @@ const SideBar = ({ schools, sources }) => {
           }}
         />
 
-        <div className='sidebar-component levels-component'>
+        <List className='sidebar-component'> {/* классы */}
+          <ListItem button onClick={openClasses}>
+            <ListItemText primary={(language === 'Русский') ? "Классы" : "Classes"} />
+            {classesOpened ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+
+          <Collapse in={classesOpened} timeout="auto" >
+            <List component="div">
+              {Object.keys(classes).map(thisClass => (
+                <ListItem button key={thisClass} onClick={() => onClassesChange(thisClass)}>
+                  <Checkbox checked={classesFilterValue.includes(thisClass)} />
+                  <ListItemText primary={(language === 'Русский') ? classes[thisClass].ru : classes[thisClass].en} />
+                </ListItem>
+              ))}
+            </List>
+          </Collapse>
+        </List>
+
+        <div className='sidebar-component levels-component'> {/* уровни */}
           <Typography>{(language === 'Русский') ? "Выберите уровни" : "Choose levels"}</Typography>
             <div className='sidebar-component levels-component-selects'>
             <FormControl variant="filled">
@@ -132,7 +171,7 @@ const SideBar = ({ schools, sources }) => {
           </div>
         </div>
         
-        <List className='sidebar-component'>
+        <List className='sidebar-component'> {/* школы */}
           <ListItem button onClick={openSchools}>
             <ListItemText primary={(language === 'Русский') ? "Школы" : "Schools"} />
             {schoolsOpened ? <ExpandLess /> : <ExpandMore />}
@@ -150,7 +189,7 @@ const SideBar = ({ schools, sources }) => {
           </Collapse>
         </List>
 
-        <List className='sidebar-component'>
+        <List className='sidebar-component'> {/* компоненты */}
           <ListItem button onClick={openComponents}>
             <ListItemText primary={(language === 'Русский') ? "Компоненты" : "Components"} />
             {componentsOpened ? <ExpandLess /> : <ExpandMore />}
@@ -195,7 +234,7 @@ const SideBar = ({ schools, sources }) => {
           </Collapse>
         </List>
 
-        <List className='sidebar-component'>
+        <List className='sidebar-component'> {/* источники */}
           <ListItem button onClick={openSources}>
             <ListItemText primary={(language === 'Русский') ? "Источники" : "Sources"} />
             {sourcesOpened ? <ExpandLess /> : <ExpandMore />}
@@ -213,7 +252,7 @@ const SideBar = ({ schools, sources }) => {
           </Collapse>
         </List>
 
-        <FormControl variant="filled" className='sidebar-component'>
+        <FormControl variant="filled" className='sidebar-component'> {/* язык */}
           <InputLabel>{(language === 'Русский') ? "Выберите язык" : "Choose language"}</InputLabel>
           <Select value={language} onChange={onLanguageChange}>
             <MenuItem value='Русский'>Русский</MenuItem>
@@ -221,7 +260,7 @@ const SideBar = ({ schools, sources }) => {
           </Select>
         </FormControl>
 
-        <FormControl variant="filled" className='sidebar-component'>
+        <FormControl variant="filled" className='sidebar-component'> {/* сортировка */}
           <InputLabel>{(language === 'Русский') ? "Сортировка" : "Sort"}</InputLabel>
           <Select value={sortValue} onChange={onSortChange}>
             <MenuItem value={0}>{(language === 'Русский') ? "По уровню и алфавиту" : "Sort by level and alphabet"}</MenuItem>
@@ -229,9 +268,47 @@ const SideBar = ({ schools, sources }) => {
           </Select>
         </FormControl>
 
+        <List className='sidebar-component'> {/* настройки */}
+          <ListItem button onClick={openSettings}>
+            <ListItemText primary={(language === 'Русский') ? "Настройки" : "Settings"} />
+            {settingsOpened ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>
+
+          <Collapse in={settingsOpened} timeout="auto" > {/* размер карточек */}
+            <List component="div" dense>
+              <ListItem>
+                <IconButton onClick={() => onChangeCardsWidth('dec')}>
+                  <RemoveIcon />
+                </IconButton>
+                <ListItemText primary={(language === 'Русский') ? 'Ширина карточек' : 'Cards width'} />
+                <IconButton onClick={() => onChangeCardsWidth('inc')}>
+                  <AddIcon />
+                </IconButton>
+                <IconButton onClick={() => onChangeCardsWidth('')}>
+                  <ReplayIcon />
+                </IconButton>
+              </ListItem>
+
+              <ListItem>
+                <IconButton onClick={() => onChangeCardsHeight('dec')}>
+                  <RemoveIcon />
+                </IconButton>
+                <ListItemText primary={(language === 'Русский') ? 'Высота карточек' : 'Cards height'} />
+                <IconButton onClick={() => onChangeCardsHeight('inc')}>
+                  <AddIcon />
+                </IconButton>
+                <IconButton onClick={() => onChangeCardsWidth('')}>
+                  <ReplayIcon />
+                </IconButton>
+              </ListItem>
+            </List>
+          </Collapse>
+        </List>
+
       </div>
 
       <p className={`sidebar-last-spells ${isSidebarOpened ? "" : "sidebar-filters-hidden"}`}>{(language === 'Русский') ? 'Заклинаний найдено: ' + numberOfSpells : "Spells found: " + numberOfSpells}</p>
+    
     </nav>
   );
 }

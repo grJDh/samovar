@@ -19,6 +19,8 @@ export const initialState = {
 
   sourcesFilterValue: checkLocalStorage('sourcesFilterValue', ['PHB', 'XGTE', 'TOEE', 'SCAG']),
 
+  classesFilterValue: checkLocalStorage('classesFilterValue', []),
+
   numberOfSpells: 0,
 
   sortValue: checkLocalStorage('sortValue', 0)
@@ -62,6 +64,17 @@ const filtersSlice = createSlice({
       placeToLocalStorage('componentsModeStrict', payload);
     },
 
+    changeClasses: (state, { payload }) => {
+      const indexOfClass = state.classesFilterValue.indexOf(payload);
+      if (indexOfClass === -1) {
+        state.classesFilterValue = [...state.classesFilterValue, payload];
+        placeToLocalStorage('classesFilterValue', [...state.classesFilterValue, payload]);
+      } else {
+        state.classesFilterValue = state.classesFilterValue.filter((cls, i) => i !== indexOfClass);
+        placeToLocalStorage('classesFilterValue', state.classesFilterValue.filter((cls, i) => i !== indexOfClass));
+      }
+    },
+
     changeSchools: (state, { payload }) => {
       const indexOfSChool = state.schoolsFilterValue.indexOf(payload);
       if (indexOfSChool === -1) {
@@ -102,7 +115,7 @@ const filtersSlice = createSlice({
 });
 
 export const { toggleSidebar, changeLanguage, changeSearchField, clearSearchField, setComponentValue, setComponentsMode, changeSchools,
-               setLevelsValue, changeSources, changeNumberOfSpells, changeSort } = filtersSlice.actions;
+               setLevelsValue, changeSources, changeNumberOfSpells, changeSort, changeClasses } = filtersSlice.actions;
 
 export const filtersSelector = state => state.filters;
 

@@ -7,7 +7,7 @@ import Collapse from '@material-ui/core/Collapse';
 import './SpellCard.scss';
 
 const SpellCard = ({ name, castingTime, range, components, duration, description, materials, source, level, school, materialCost, otherName,
-                     materialConsumed, higherLevels, language, languageProperty, schools, sources }) => {
+                     materialConsumed, higherLevels, language, languageProperty, schools, sources, cardsHeight, cardsWidth }) => {
 
 
   const levelAdjusted = () => {
@@ -106,7 +106,7 @@ const SpellCard = ({ name, castingTime, range, components, duration, description
   }
 
   return (
-    <div className='spellcard'>
+    <div className='spellcard' style={{width: cardsWidth+'px', height: cardsHeight+'px'}}>
       <div className="spellcard-name section">
         <Tooltip title={<span className='name-tooltip'>{capitalize(otherName)}</span>} enterDelay={300} arrow>
           <h1>{capitalize(name)}</h1>

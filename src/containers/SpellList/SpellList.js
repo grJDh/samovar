@@ -8,9 +8,11 @@ import SpellCard from '../../components/SpellCard/SpellCard';
 
 import './SpellList.scss';
 
-import { spells } from '../../spellsArray';
+import { spells, spellsByClasses } from '../../spellsArray';
 
 import { filtersSelector, changeNumberOfSpells } from '../../slices/filters';
+import { cardsSelector } from '../../slices/cards';
+
 
 const SpellList = ({ schools, sources }) => {
 
@@ -19,7 +21,9 @@ const SpellList = ({ schools, sources }) => {
   const onNumberOfSpellsChange = () =>{dispatch(changeNumberOfSpells(filteredSpells.length));}
 
   const { isSidebarOpened, language, searchFilterValue, componentsFilterValue, componentsModeStrict, schoolsFilterValue, levelsFilterValue,
-          sourcesFilterValue, sortValue } = useSelector(filtersSelector);
+          sourcesFilterValue, classesFilterValue, sortValue } = useSelector(filtersSelector);
+
+  const { cardsWidth, cardsHeight} = useSelector(cardsSelector);
 
   const searchFilter = spell =>
     spell.ru.name.toLowerCase().includes(searchFilterValue.toLowerCase()) ||
@@ -65,6 +69,14 @@ const SpellList = ({ schools, sources }) => {
     }
   }
 
+  const classesFilter = spell => {
+    if (classesFilterValue.length) {
+      for (let i = 0; i < classesFilterValue.length; i ++) {
+        if (spellsByClasses[classesFilterValue[i]].spells.includes(spell.en.name)) return true
+      };
+    } else return true
+  }
+
   const levelsFilter = spell => (spell.level >= levelsFilterValue[0] && spell.level <= levelsFilterValue[1]) ? true : false;
 
   const languageProperty = (other = false) => {
@@ -103,8 +115,9 @@ const SpellList = ({ schools, sources }) => {
 
   const filteredSpells = spells
   .filter(spell => searchFilter(spell))
-  .filter(spell => schoolsFilter(spell))
   .filter(spell => levelsFilter(spell))
+  .filter(spell => classesFilter(spell))
+  .filter(spell => schoolsFilter(spell))
   .filter(spell => componentsFilter(spell))
   .filter(spell => sourcesFilter(spell))
   .sort((spell1, spell2) => spellsSort(spell1, spell2))
@@ -112,6 +125,11 @@ const SpellList = ({ schools, sources }) => {
   useEffect(() => {
     onNumberOfSpellsChange();
   }, [filteredSpells.length])
+
+  //КЛАССЫ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  // увеличение размера карточек
+  // закреп карточек
   
   // время
   // дистанция
@@ -119,8 +137,6 @@ const SpellList = ({ schools, sources }) => {
 
   // тултипы для источников на карточках
   // кнопка вверх
-  // увеличение размера карточек
-  // закреп карточек
   // папки закрепов
   // новые виды карточек
 
@@ -145,6 +161,8 @@ const SpellList = ({ schools, sources }) => {
               source={filteredSpells[index].source}
               level={filteredSpells[index].level}
               school={filteredSpells[index].school}
+              cardsWidth={cardsWidth}
+              cardsHeight={cardsHeight}
 
               key={filteredSpells[index].en.name}
               languageProperty={languageProperty}
@@ -168,13 +186,13 @@ const SpellList = ({ schools, sources }) => {
           {({ height, width }) => (
             <Grid
               className='spell-table-window'
-              columnCount={Math.floor(width / 290)}
-              rowCount={Math.ceil(filteredSpells.length / Math.floor(width / 290))}
-              columnWidth={290}
-              rowHeight={510}
+              columnCount={Math.floor(width / (cardsWidth + 10))}
+              rowCount={Math.ceil(filteredSpells.length / Math.floor(width / (cardsWidth + 10)))}
+              columnWidth={cardsWidth + 10}
+              rowHeight={cardsHeight + 10}
               height={height}
               width={width}
-              itemData={Math.floor(width / 290)}
+              itemData={Math.floor(width / (cardsWidth + 10))}
             >
               {cellRenderer}
             </Grid>
