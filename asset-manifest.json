@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/samovar/static/css/main.c9189e01.chunk.css",
+    "main.css": "/samovar/static/css/main.e31394de.chunk.css",
     "main.js": "/samovar/static/js/main.db4154ba.chunk.js",
     "main.js.map": "/samovar/static/js/main.db4154ba.chunk.js.map",
     "runtime-main.js": "/samovar/static/js/runtime-main.d4a8d443.js",
@@ -8,15 +8,15 @@
     "static/js/2.6de2df38.chunk.js": "/samovar/static/js/2.6de2df38.chunk.js",
     "static/js/2.6de2df38.chunk.js.map": "/samovar/static/js/2.6de2df38.chunk.js.map",
     "index.html": "/samovar/index.html",
-    "precache-manifest.43e33ec203499b4e5708af48a0046f64.js": "/samovar/precache-manifest.43e33ec203499b4e5708af48a0046f64.js",
+    "precache-manifest.28d1568e7a991ed828af1b7971167c16.js": "/samovar/precache-manifest.28d1568e7a991ed828af1b7971167c16.js",
     "service-worker.js": "/samovar/service-worker.js",
-    "static/css/main.c9189e01.chunk.css.map": "/samovar/static/css/main.c9189e01.chunk.css.map",
+    "static/css/main.e31394de.chunk.css.map": "/samovar/static/css/main.e31394de.chunk.css.map",
     "static/js/2.6de2df38.chunk.js.LICENSE.txt": "/samovar/static/js/2.6de2df38.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d4a8d443.js",
     "static/js/2.6de2df38.chunk.js",
-    "static/css/main.c9189e01.chunk.css",
+    "static/css/main.e31394de.chunk.css",
     "static/js/main.db4154ba.chunk.js"
   ]
 }
