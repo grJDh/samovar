@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "226d70c19c29e589a39f15efd6dd2df3",
+    "revision": "6160eb4bec4d45492dd07585a15e5eb6",
     "url": "/samovar/index.html"
   },
   {
-    "revision": "a030d15e0ddfe6ae7ddf",
-    "url": "/samovar/static/css/main.6ec29abe.chunk.css"
+    "revision": "3a8c1cab5e9458535d70",
+    "url": "/samovar/static/css/main.c9189e01.chunk.css"
   },
   {
     "revision": "e4e3351945c7f335b530",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/samovar/static/js/2.6de2df38.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a030d15e0ddfe6ae7ddf",
-    "url": "/samovar/static/js/main.85ed0e92.chunk.js"
+    "revision": "3a8c1cab5e9458535d70",
+    "url": "/samovar/static/js/main.db4154ba.chunk.js"
   },
   {
     "revision": "dc4442fa93bc912a4b72",
