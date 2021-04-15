@@ -1,6 +1,6 @@
 # Samovar
 
-[Samovar](https://grjdh.github.io/samovar/ "Samovar") is a small SPA designed to give easy and convenient access to spells from D&D 5E.
+[Samovar](https://grjdh.github.io/samovar/ "Samovar") is a small SPA designed to give easy and convenient access to spells from D&D 5E with search and advanced filters to be able to find and/or filter spells quick and easy.
 
 App is almost completed with a few unfinished or planned functions like markdown in cards\' texts, different cards\' styles and unfinished translations and spelling errors, but otherwise it\'s fully operational and ready to use. It is hosted on Github Pages with [gh-pages](https://www.npmjs.com/package/gh-pages "gh-pages").
 
